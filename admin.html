@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BossOrNot Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #111;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 13px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #111;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .msg {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .payment {
+      border: 1px solid #e5e5e5;
+      border-radius: 14px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: #fff3cd;
+      color: #856404;
+      font-size: 13px;
+    }
+
+    .row {
+      margin: 7px 0;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .logout {
+      background: #777;
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div id="loginCard" class="card">
+    <h1>Admin Login</h1>
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Admin Password"
+    >
+
+    <button onclick="login()">
+      Login
+    </button>
+
+    <div id="loginMsg" class="msg"></div>
+  </div>
+
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden">
+
+    <div class="card">
+      <button class="logout" onclick="logout()">
+        Logout
+      </button>
+
+      <h1>BossOrNot Admin</h1>
+      <p>Payment Requests</p>
+
+      <button onclick="loadPayments()">
+        Refresh
+      </button>
+    </div>
+
+    <div class="card">
+      <div id="payments">
+        Loading...
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let adminToken = localStorage.getItem("boss_admin_token");
+
+
+function showDashboard() {
+  document.getElementById("loginCard").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+
+  loadPayments();
+}
+
+
+function logout() {
+  localStorage.removeItem("boss_admin_token");
+
+  adminToken = null;
+
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("loginCard").classList.remove("hidden");
+}
+
+
+async function login() {
+
+  const password =
+    document.getElementById("password").value.trim();
+
+  const msg =
+    document.getElementById("loginMsg");
+
+  if (!password) {
+    msg.textContent = "Password ထည့်ပါ";
+    return;
+  }
+
+  msg.textContent = "Logging in...";
+
+  try {
+
+    const response = await fetch("/api/admin", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.ok) {
+      msg.textContent =
+        data.message || "Login failed";
+      return;
+    }
+
+    adminToken = data.token;
+
+    localStorage.setItem(
+      "boss_admin_token",
+      adminToken
+    );
+
+    document.getElementById("password").value = "";
+
+    showDashboard();
+
+  } catch (error) {
+
+    msg.textContent =
+      "Connection error: " + error.message;
+
+  }
+}
+
+
+async function loadPayments() {
+
+  const box =
+    document.getElementById("payments");
+
+  box.innerHTML = "Loading...";
+
+  try {
+
+    const response = await fetch(
+      "/api/admin",
+      {
+        headers: {
+          "Authorization":
+            "Bearer " + adminToken
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.status === 401) {
+      logout();
+      return;
+    }
+
+    if (!response.ok || !data.ok) {
+      box.innerHTML =
+        "<b>❌ Error</b><br>" +
+        (data.message || "Failed");
+      return;
+    }
+
+    if (!data.payments.length) {
+      box.innerHTML =
+        "<p>No payment requests.</p>";
+      return;
+    }
+
+    box.innerHTML =
+      data.payments.map(payment => {
+
+        return `
+          <div class="payment">
+
+            <div class="row">
+              <span class="label">Order ID:</span>
+              ${escapeHtml(payment.order_id)}
+            </div>
+
+            <div class="row">
+              <span class="label">Name:</span>
+              ${escapeHtml(payment.name)}
+            </div>
+
+            <div class="row">
+              <span class="label">Email:</span>
+              ${escapeHtml(payment.email)}
+            </div>
+
+            <div class="row">
+              <span class="label">Amount:</span>
+              ${payment.amount} MMK
+            </div>
+
+            <div class="row">
+              <span class="label">Method:</span>
+              ${escapeHtml(payment.method)}
+            </div>
+
+            <div class="row">
+              <span class="label">Status:</span>
+              <span class="status">
+                ${escapeHtml(payment.status)}
+              </span>
+            </div>
+
+            <div class="row">
+              <span class="label">Created:</span>
+              ${escapeHtml(payment.created_at)}
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+
+  } catch (error) {
+
+    box.innerHTML =
+      "<b>❌ Connection error</b><br>" +
+      escapeHtml(error.message);
+
+  }
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+// Auto login if token exists
+if (adminToken) {
+  showDashboard();
+}
+
+</script>
+
+</body>
+</html>
