@@ -1561,3 +1561,27 @@ button:focus-visible {
   }
 
 }
+
+body {
+  font-family:
+    "Noto Sans Myanmar",
+    sans-serif;
+}
+
+.hero h1,
+.hero h1 b {
+  font-family:
+    "Noto Serif Myanmar",
+    "Noto Sans Myanmar",
+    sans-serif;
+
+  font-weight: 800;
+}
+
+.hero p,
+.payment-section,
+#payform {
+  font-family:
+    "Noto Sans Myanmar",
+    sans-serif;
+}
