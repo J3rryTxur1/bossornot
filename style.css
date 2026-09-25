@@ -1509,3 +1509,55 @@ button:focus-visible {
   }
 
 }
+
+/* =========================================================
+   CENTERED MOBILE HERO
+========================================================= */
+
+@media (max-width: 600px) {
+
+  body {
+    min-height: 100vh;
+  }
+
+  .wrap {
+    width: calc(100% - 28px);
+    max-width: 470px;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 18px 0 30px;
+  }
+
+  .hero {
+    padding: 26px 18px 24px;
+  }
+
+  .brand {
+    margin-bottom: 22px;
+  }
+
+  .hero h1 {
+    font-size: 31px;
+    line-height: 1.38;
+  }
+
+  .hero p {
+    margin: 18px auto 21px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .cta {
+    min-height: 56px;
+    border-radius: 17px;
+    font-size: 17px;
+  }
+
+}
