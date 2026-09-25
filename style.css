@@ -1,9 +1,16 @@
+/* =========================================================
+   BOSSORNOT / WEALTH SHOWCASE
+   Premium Mobile UI
+========================================================= */
+
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
+  background: #050606;
 }
 
 body {
@@ -12,10 +19,11 @@ body {
 
   background:
     radial-gradient(
-      circle at 50% -10%,
-      #252016 0%,
-      #0c0e0e 38%,
-      #050606 75%
+      circle at 50% -12%,
+      #292318 0%,
+      #10110f 30%,
+      #070808 62%,
+      #040505 100%
     );
 
   color: #fff;
@@ -25,22 +33,49 @@ body {
     "Noto Sans Myanmar",
     "Myanmar Text",
     sans-serif;
+
+  -webkit-font-smoothing: antialiased;
 }
 
-/* =========================
-   MAIN CONTAINER
-========================= */
+
+/* =========================================================
+   GLOBAL BUTTON RESET
+========================================================= */
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  outline: none;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+}
+
+
+/* =========================================================
+   MAIN WRAPPER
+========================================================= */
 
 .wrap {
-  width: calc(100% - 28px);
+  width: calc(100% - 32px);
   max-width: 520px;
 
-  margin: 26px auto 70px;
+  margin: 24px auto 70px;
 }
 
-/* =========================
+
+/* =========================================================
    COMMON CARD
-========================= */
+========================================================= */
 
 .card {
   position: relative;
@@ -48,8 +83,8 @@ body {
   background:
     linear-gradient(
       145deg,
-      rgba(22, 24, 24, 0.98),
-      rgba(12, 14, 14, 0.98)
+      rgba(24, 26, 25, 0.98),
+      rgba(10, 12, 12, 0.98)
     );
 
   border: 1px solid rgba(247, 196, 92, 0.24);
@@ -57,47 +92,54 @@ body {
   border-radius: 30px;
 
   box-shadow:
-    0 25px 70px rgba(0, 0, 0, 0.55),
+    0 28px 80px rgba(0, 0, 0, 0.58),
     inset 0 1px 0 rgba(255, 255, 255, 0.035);
 
   overflow: hidden;
 }
 
-/* subtle gold light */
+
+/* Soft gold light */
 
 .card::before {
   content: "";
 
   position: absolute;
 
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: 240px;
 
-  top: -140px;
+  top: -155px;
   left: 50%;
 
   transform: translateX(-50%);
 
-  background: rgba(247, 196, 92, 0.12);
+  background:
+    rgba(247, 196, 92, 0.12);
 
-  filter: blur(70px);
+  filter: blur(75px);
 
   pointer-events: none;
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero {
   text-align: center;
 
-  padding: 34px 24px 30px;
+  padding:
+    34px
+    24px
+    30px;
 }
 
-/* =========================
+
+/* =========================================================
    BRAND
-========================= */
+========================================================= */
 
 .brand {
   position: relative;
@@ -110,10 +152,19 @@ body {
 
   letter-spacing: 4px;
 
-  margin-bottom: 34px;
+  margin-bottom: 32px;
+
+  text-shadow:
+    0 0 20px rgba(247, 196, 92, 0.08);
 }
 
-.brand span {
+.brand .crown {
+  margin-right: 5px;
+
+  font-size: 18px;
+}
+
+.brand span:not(.crown) {
   font-weight: 400;
 
   font-size: 14px;
@@ -123,16 +174,18 @@ body {
   margin-left: 5px;
 }
 
-/* =========================
+
+/* =========================================================
    HERO TITLE
-========================= */
+========================================================= */
 
 .hero h1 {
   position: relative;
 
   margin: 0;
 
-  font-size: clamp(34px, 8vw, 50px);
+  font-size:
+    clamp(34px, 8vw, 50px);
 
   line-height: 1.42;
 
@@ -149,17 +202,21 @@ body {
   margin-top: 2px;
 
   text-shadow:
-    0 0 25px rgba(247, 196, 92, 0.15);
+    0 0 28px rgba(247, 196, 92, 0.16);
 }
 
-/* =========================
+
+/* =========================================================
    HERO DESCRIPTION
-========================= */
+========================================================= */
 
 .hero p {
   position: relative;
 
-  margin: 25px auto 27px;
+  margin:
+    24px
+    auto
+    27px;
 
   max-width: 440px;
 
@@ -170,16 +227,26 @@ body {
   line-height: 1.8;
 }
 
-/* =========================
-   PREMIUM CTA
-========================= */
+
+/* =========================================================
+   PREMIUM CTA BUTTON
+========================================================= */
 
 .cta {
   position: relative;
 
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
   width: 100%;
 
   min-height: 64px;
+
+  padding: 0 22px;
 
   border: 0;
 
@@ -198,33 +265,58 @@ body {
   background:
     linear-gradient(
       110deg,
-      #e9a62f,
-      #ffd66d,
-      #f4b63d,
-      #ffd66d,
-      #e9a62f
+      #e7a12d 0%,
+      #ffd66d 25%,
+      #f5b942 50%,
+      #ffe07d 75%,
+      #e7a12d 100%
     );
 
-  background-size: 250% 100%;
+  background-size: 260% 100%;
 
   box-shadow:
-    0 12px 35px rgba(235, 168, 48, 0.20),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    0 13px 36px rgba(235, 168, 48, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 
   animation:
-    goldFlow 4s ease-in-out infinite;
+    goldFlow 5s ease-in-out infinite;
 
   transition:
-    transform 0.25s cubic-bezier(.2,.8,.2,1),
-    box-shadow 0.25s ease;
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
-/* moving shine */
+
+/* Button text must stay above shine */
+
+.cta .btn-text,
+.cta .btn-arrow {
+  position: relative;
+
+  z-index: 3;
+}
+
+
+/* Arrow */
+
+.btn-arrow {
+  font-size: 24px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.25s ease;
+}
+
+
+/* Moving shine */
 
 .cta::before {
   content: "";
 
   position: absolute;
+
+  z-index: 1;
 
   top: 0;
   left: -80%;
@@ -236,59 +328,87 @@ body {
     linear-gradient(
       90deg,
       transparent,
-      rgba(255,255,255,0.45),
+      rgba(255, 255, 255, 0.48),
       transparent
     );
 
   transform: skewX(-20deg);
 
   animation:
-    buttonShine 3.5s ease-in-out infinite;
+    buttonShine 4s ease-in-out infinite;
+
+  pointer-events: none;
 }
 
-/* glow */
+
+/* Outer glow */
 
 .cta::after {
   content: "";
 
   position: absolute;
 
-  inset: -3px;
+  z-index: 0;
+
+  inset: -2px;
 
   border-radius: inherit;
 
   box-shadow:
-    0 0 0 rgba(247,196,92,0);
+    0 0 0 rgba(247, 196, 92, 0);
 
   animation:
-    buttonGlow 2.8s ease-in-out infinite;
+    buttonGlow 3s ease-in-out infinite;
 
   pointer-events: none;
 }
 
+
+/* Hover */
+
 .cta:hover {
-  transform: translateY(-3px) scale(1.015);
+  transform:
+    translateY(-2px)
+    scale(1.01);
 
   box-shadow:
-    0 18px 45px rgba(235, 168, 48, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    0 18px 48px rgba(235, 168, 48, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.48);
 }
 
+.cta:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+
+/* IMPORTANT:
+   Remove blue Android tap/focus effect */
+
+.cta:focus,
+.cta:focus-visible,
 .cta:active {
-  transform: scale(0.95);
+  outline: none;
 
-  box-shadow:
-    0 5px 18px rgba(235, 168, 48, 0.2);
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* click animation */
+
+/* Click animation */
 
 .cta.clicked {
   animation:
-    buttonClick 0.55s cubic-bezier(.2,.8,.2,1);
+    buttonClick
+    0.55s
+    cubic-bezier(.2, .8, .2, 1);
 }
 
+
+/* =========================================================
+   CTA ANIMATIONS
+========================================================= */
+
 @keyframes goldFlow {
+
   0% {
     background-position: 0% 50%;
   }
@@ -300,9 +420,12 @@ body {
   100% {
     background-position: 0% 50%;
   }
+
 }
 
+
 @keyframes buttonShine {
+
   0% {
     left: -80%;
   }
@@ -314,59 +437,72 @@ body {
   100% {
     left: 130%;
   }
+
 }
 
+
 @keyframes buttonGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow:
-      0 0 0 rgba(247,196,92,0);
+      0 0 0 rgba(247, 196, 92, 0);
   }
 
   50% {
     box-shadow:
-      0 0 28px rgba(247,196,92,0.25);
+      0 0 28px rgba(247, 196, 92, 0.25);
   }
+
 }
 
+
 @keyframes buttonClick {
+
   0% {
     transform: scale(1);
   }
 
-  35% {
-    transform: scale(0.93);
+  30% {
+    transform: scale(0.94);
   }
 
-  70% {
-    transform: scale(1.04);
+  65% {
+    transform: scale(1.035);
   }
 
   100% {
     transform: scale(1);
   }
+
 }
 
-/* =========================
+
+/* =========================================================
    PAYMENT SECTION
-========================= */
+========================================================= */
 
 .payment-section {
   display: none;
 
   margin-top: 22px;
 
-  padding: 28px 22px;
+  padding:
+    28px
+    22px;
 
   opacity: 0;
 
   transform:
-    translateY(60px)
+    translateY(55px)
     scale(0.94);
 
-  transform-origin: center top;
+  transform-origin:
+    center top;
 }
 
-/* reveal */
+
+/* Show */
 
 .payment-section.show {
   display: block;
@@ -374,9 +510,14 @@ body {
   animation:
     paymentReveal
     0.9s
-    cubic-bezier(.16,1,.3,1)
+    cubic-bezier(.16, 1, .3, 1)
     forwards;
 }
+
+
+/* =========================================================
+   PAYMENT REVEAL
+========================================================= */
 
 @keyframes paymentReveal {
 
@@ -384,7 +525,7 @@ body {
     opacity: 0;
 
     transform:
-      translateY(60px)
+      translateY(55px)
       scale(0.94);
 
     filter: blur(8px);
@@ -396,9 +537,9 @@ body {
     filter: blur(0);
   }
 
-  70% {
+  72% {
     transform:
-      translateY(-6px)
+      translateY(-5px)
       scale(1.01);
   }
 
@@ -409,16 +550,60 @@ body {
       translateY(0)
       scale(1);
   }
+
 }
 
-/* =========================
+
+/* =========================================================
+   PAYMENT HEADER
+========================================================= */
+
+.payment-header {
+  position: relative;
+
+  margin-bottom: 22px;
+}
+
+.payment-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 25px;
+
+  padding:
+    5px
+    10px;
+
+  border-radius: 20px;
+
+  border:
+    1px solid rgba(247, 196, 92, 0.20);
+
+  background:
+    rgba(247, 196, 92, 0.07);
+
+  color: #d8ad55;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+}
+
+
+/* =========================================================
    PAYMENT TITLE
-========================= */
+========================================================= */
 
 .payment-section h2 {
   position: relative;
 
-  margin: 0 0 24px;
+  margin:
+    9px
+    0
+    10px;
 
   font-size: 30px;
 
@@ -430,21 +615,48 @@ body {
 
   opacity: 0;
 
-  transform: translateY(18px);
+  transform:
+    translateY(18px);
 }
 
 .payment-section.show h2 {
   animation:
     contentUp
     0.6s
-    0.22s
-    cubic-bezier(.2,.8,.2,1)
+    0.20s
+    cubic-bezier(.2, .8, .2, 1)
     forwards;
 }
 
-/* =========================
-   TOTAL BOX
-========================= */
+
+.payment-header p {
+  margin: 0;
+
+  color: #929596;
+
+  font-size: 14px;
+
+  line-height: 1.65;
+
+  opacity: 0;
+
+  transform:
+    translateY(15px);
+}
+
+.payment-section.show .payment-header p {
+  animation:
+    contentUp
+    0.6s
+    0.28s
+    cubic-bezier(.2, .8, .2, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
 
 .total {
   display: flex;
@@ -453,9 +665,11 @@ body {
 
   justify-content: space-between;
 
-  gap: 12px;
+  gap: 14px;
 
-  padding: 21px 18px;
+  padding:
+    19px
+    17px;
 
   margin-bottom: 18px;
 
@@ -464,33 +678,62 @@ body {
   background:
     linear-gradient(
       135deg,
-      #1d1914,
-      #14110e
+      #1e1a14,
+      #12100d
     );
 
-  border: 1px solid rgba(247, 196, 92, 0.28);
+  border:
+    1px solid rgba(247, 196, 92, 0.28);
 
   opacity: 0;
 
-  transform: translateY(18px);
+  transform:
+    translateY(18px);
 }
 
 .payment-section.show .total {
   animation:
     contentUp
     0.6s
-    0.34s
-    cubic-bezier(.2,.8,.2,1)
+    0.36s
+    cubic-bezier(.2, .8, .2, 1)
     forwards;
 }
 
-.total small {
-  color: #999b9c;
 
-  font-size: 15px;
+.total-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
 }
 
+
+.total-icon {
+  color: #f7c45c;
+
+  font-size: 12px;
+
+  text-shadow:
+    0 0 12px rgba(247, 196, 92, 0.4);
+}
+
+
+.total small {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #8e9091;
+
+  font-size: 13px;
+}
+
+
 .total strong {
+  display: block;
+
   color: #f7c45c;
 
   font-size: 25px;
@@ -498,95 +741,205 @@ body {
   white-space: nowrap;
 
   text-shadow:
-    0 0 20px rgba(247,196,92,0.12);
+    0 0 20px rgba(247, 196, 92, 0.12);
 }
 
-/* =========================
+
+.verified-badge {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    rgba(247, 196, 92, 0.10);
+
+  border:
+    1px solid rgba(247, 196, 92, 0.25);
+
+  color: #f7c45c;
+
+  font-size: 15px;
+}
+
+
+/* =========================================================
    PAYMENT BOX
-========================= */
+========================================================= */
 
 .paybox {
-  padding: 20px;
+  padding:
+    18px;
 
   border-radius: 22px;
 
-  background: #0e1010;
+  background:
+    #0d0f0f;
 
-  border: 1px solid rgba(255,255,255,0.10);
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
 
   opacity: 0;
 
-  transform: translateY(18px);
+  transform:
+    translateY(18px);
 }
 
 .payment-section.show .paybox {
   animation:
     contentUp
     0.6s
-    0.46s
-    cubic-bezier(.2,.8,.2,1)
+    0.48s
+    cubic-bezier(.2, .8, .2, 1)
     forwards;
 }
 
-.paybox > div:not(.qrbox) {
-  display: grid;
 
-  grid-template-columns: 1fr auto auto;
+/* =========================================================
+   PAYMENT ROW
+========================================================= */
+
+.paybox > .payment-row {
+  display: flex;
 
   align-items: center;
 
-  gap: 12px;
+  justify-content: space-between;
 
-  padding: 17px 0;
+  gap: 14px;
+
+  min-height: 56px;
+
+  padding:
+    14px
+    0;
 
   border-bottom:
-    1px solid rgba(255,255,255,0.07);
+    1px solid rgba(255, 255, 255, 0.07);
 }
 
-.paybox span {
-  color: #929596;
+
+.paybox > .payment-row > span {
+  color: #8f9293;
+
+  font-size: 14px;
+}
+
+
+.paybox > .payment-row > b {
+  color: #f2f3f3;
+
+  font-size: 16px;
+
+  text-align: right;
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+.account-value {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 8px;
+}
+
+
+.account-value b {
+  color: #fff;
 
   font-size: 15px;
+
+  letter-spacing: 0.3px;
 }
 
-.paybox b {
+
+/* =========================================================
+   COPY BUTTON
+========================================================= */
+
+.copy-btn {
+  min-height: 34px;
+
+  padding:
+    7px
+    12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.13);
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #242727,
+      #191b1b
+    );
+
   color: #fff;
 
-  font-size: 17px;
-}
-
-.paybox button {
-  border: 1px solid rgba(255,255,255,0.13);
-
-  background: #202323;
-
-  color: #fff;
-
-  padding: 9px 14px;
-
-  border-radius: 12px;
+  font-size: 12px;
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
 }
 
-.paybox button:active {
-  transform: scale(0.94);
+
+.copy-btn:hover {
+  background:
+    linear-gradient(
+      145deg,
+      #303333,
+      #202222
+    );
 }
 
-/* =========================
-   QR
-========================= */
+
+.copy-btn:active {
+  transform:
+    scale(0.94);
+}
+
+
+/* =========================================================
+   QR BOX
+========================================================= */
 
 .qrbox {
-  min-height: 210px;
+  margin-top: 18px;
 
-  margin-top: 20px;
+  padding:
+    18px
+    14px
+    16px;
 
-  border-radius: 18px;
+  border-radius: 19px;
 
-  border: 1px dashed rgba(247,196,92,0.30);
+  border:
+    1px solid rgba(247, 196, 92, 0.20);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(247, 196, 92, 0.025),
+      rgba(255, 255, 255, 0.015)
+    );
 
   display: flex;
 
@@ -596,72 +949,144 @@ body {
 
   flex-direction: column;
 
-  color: #f7c45c;
-
   text-align: center;
 }
 
-.qrbox small {
-  margin-top: 8px;
 
-  color: #6f7273;
+.qr-title {
+  color: #f7c45c;
 
-  font-size: 13px;
+  font-size: 17px;
+
+  font-weight: 700;
+
+  margin-bottom: 10px;
 }
 
-/* =========================
+
+.qr-image-wrap {
+  width: 190px;
+  height: 190px;
+
+  padding: 9px;
+
+  background: #fff;
+
+  border-radius: 15px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+
+.qr-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  border-radius: 7px;
+}
+
+
+.qrbox small {
+  display: block;
+
+  margin-top: 11px;
+
+  color: #777b7c;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
    FORM
-========================= */
+========================================================= */
 
 #payform {
   display: flex;
 
   flex-direction: column;
 
-  gap: 10px;
+  gap: 9px;
 
   margin-top: 22px;
 
   opacity: 0;
 
-  transform: translateY(18px);
+  transform:
+    translateY(18px);
 }
 
 .payment-section.show #payform {
   animation:
     contentUp
     0.6s
-    0.58s
-    cubic-bezier(.2,.8,.2,1)
+    0.60s
+    cubic-bezier(.2, .8, .2, 1)
     forwards;
 }
 
-#payform label {
-  color: #b9bbbc;
 
-  font-size: 15px;
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-bottom: 5px;
+}
+
+
+#payform label {
+  color: #b8babb;
+
+  font-size: 14px;
 
   font-weight: 600;
-
-  margin-top: 7px;
 }
+
+
+#payform label span {
+  color: #f7c45c;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
 
 #payform input {
   width: 100%;
 
-  min-height: 55px;
+  min-height: 54px;
 
-  padding: 0 16px;
+  padding:
+    0
+    15px;
 
   border-radius: 15px;
 
-  border: 1px solid rgba(255,255,255,0.11);
+  border:
+    1px solid rgba(255, 255, 255, 0.10);
 
-  background: #101212;
+  background:
+    #0f1111;
 
   color: #fff;
 
-  font-size: 16px;
+  font-size: 15px;
 
   outline: none;
 
@@ -670,102 +1095,248 @@ body {
     box-shadow 0.2s ease;
 }
 
+
 #payform input:focus {
-  border-color: #f7c45c;
+  outline: none;
+
+  border-color:
+    rgba(247, 196, 92, 0.48);
 
   box-shadow:
-    0 0 0 3px rgba(247,196,92,0.08);
+    0 0 0 3px
+    rgba(247, 196, 92, 0.07);
 }
+
 
 #payform input::placeholder {
-  color: #626566;
+  color: #5e6263;
 }
+
+
+/* =========================================================
+   FILE UPLOAD
+========================================================= */
+
+.upload-box {
+  position: relative;
+
+  min-height: 72px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding:
+    10px
+    13px;
+
+  border:
+    1px dashed rgba(247, 196, 92, 0.28);
+
+  border-radius: 15px;
+
+  background:
+    rgba(247, 196, 92, 0.025);
+
+  overflow: hidden;
+}
+
+
+.upload-icon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(247, 196, 92, 0.10);
+
+  color: #f7c45c;
+
+  font-size: 20px;
+}
+
+
+.upload-text {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.upload-text strong {
+  color: #e5e6e6;
+
+  font-size: 13px;
+}
+
+
+.upload-text small {
+  color: #6f7374;
+
+  font-size: 11px;
+}
+
+
+/* Native file input */
 
 #payform input[type="file"] {
-  padding: 15px;
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  padding: 0;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+  border: 0;
+
+  background: transparent;
 }
 
-/* =========================
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+#payform .wide {
+  margin-top: 8px;
+}
+
+
+/* =========================================================
    MESSAGE
-========================= */
+========================================================= */
 
 .msg {
-  text-align: center;
+  margin:
+    18px
+    0
+    0;
 
   color: #aaa;
+
+  text-align: center;
 
   line-height: 1.7;
 
   font-size: 14px;
 }
 
+
+/* =========================================================
+   CONTENT REVEAL
+========================================================= */
+
 @keyframes contentUp {
+
   from {
     opacity: 0;
 
-    transform: translateY(18px);
+    transform:
+      translateY(18px);
   }
 
   to {
     opacity: 1;
 
-    transform: translateY(0);
+    transform:
+      translateY(0);
   }
+
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 600px) {
 
   .wrap {
-    width: calc(100% - 36px);
+    width: calc(100% - 30px);
 
-    max-width: 480px;
+    max-width: 470px;
 
     margin:
-      22px auto
+      20px
+      auto
       60px;
   }
 
+
+  .card {
+    border-radius: 27px;
+  }
+
+
   .hero {
     padding:
-      31px
-      20px
+      30px
+      19px
       27px;
   }
+
 
   .brand {
     font-size: 15px;
 
     letter-spacing: 3px;
 
-    margin-bottom: 28px;
+    margin-bottom: 27px;
   }
 
-  .brand span {
+
+  .brand .crown {
+    font-size: 17px;
+  }
+
+
+  .brand span:not(.crown) {
     font-size: 12px;
 
     letter-spacing: 2px;
   }
 
+
   .hero h1 {
     font-size: 35px;
 
-    line-height: 1.42;
+    line-height: 1.43;
   }
 
+
   .hero p {
+    margin:
+      22px
+      auto
+      24px;
+
     font-size: 15px;
 
     line-height: 1.75;
-
-    margin:
-      23px
-      auto
-      24px;
   }
+
 
   .cta {
     min-height: 61px;
@@ -775,42 +1346,166 @@ body {
     font-size: 18px;
   }
 
+
   .payment-section {
     padding:
-      26px
-      19px;
+      25px
+      18px;
   }
+
 
   .payment-section h2 {
     font-size: 28px;
   }
 
+
+  .payment-header p {
+    font-size: 13px;
+  }
+
+
   .total {
     padding:
-      19px
+      18px
       15px;
   }
 
+
   .total strong {
-    font-size: 23px;
+    font-size: 22px;
   }
+
 
   .paybox {
-    padding: 17px;
+    padding:
+      16px;
   }
 
-  .paybox > div:not(.qrbox) {
-    grid-template-columns:
-      1fr
-      auto;
+
+  .paybox > .payment-row {
+    min-height: 54px;
+
+    padding:
+      13px
+      0;
   }
 
-  .paybox b {
-    text-align: right;
+
+  .paybox > .payment-row > span {
+    font-size: 13px;
   }
 
-  .paybox button {
-    grid-column: 2;
-    grid-row: 1;
+
+  .paybox > .payment-row > b {
+    font-size: 14px;
   }
+
+
+  .account-value {
+    gap: 6px;
+  }
+
+
+  .account-value b {
+    font-size: 13px;
+  }
+
+
+  .copy-btn {
+    min-height: 32px;
+
+    padding:
+      6px
+      10px;
+
+    font-size: 11px;
+  }
+
+
+  .qr-image-wrap {
+    width: 175px;
+    height: 175px;
+  }
+
+
+  .qrbox small {
+    font-size: 11px;
+  }
+
+
+  #payform input {
+    min-height: 53px;
+
+    font-size: 15px;
+  }
+
+
+  .upload-box {
+    min-height: 68px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .wrap {
+    width:
+      calc(100% - 22px);
+  }
+
+
+  .hero {
+    padding:
+      27px
+      16px
+      24px;
+  }
+
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+
+  .total strong {
+    font-size: 20px;
+  }
+
+
+  .qr-image-wrap {
+    width: 160px;
+    height: 160px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+
+  .cta,
+  .cta::before,
+  .cta::after,
+  .payment-section.show,
+  .payment-section.show h2,
+  .payment-section.show .payment-header p,
+  .payment-section.show .total,
+  .payment-section.show .paybox,
+  .payment-section.show #payform {
+    animation: none !important;
+  }
+
 }
