@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>BossOrNot Certificate</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f1f3f6;
+      color: #111;
+    }
+
+    .certificate {
+      width: 100%;
+      max-width: 850px;
+      background: #fff;
+      border: 10px solid #111;
+      padding: 10px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.15);
+    }
+
+    .inner {
+      border: 2px solid #d4af37;
+      padding: 50px 25px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: #777;
+      margin-bottom: 40px;
+    }
+
+    .title {
+      font-size: 42px;
+      font-weight: 900;
+      margin: 0 0 25px;
+      letter-spacing: 2px;
+    }
+
+    .certifies {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .name {
+      font-size: 42px;
+      font-weight: bold;
+      margin: 15px 0;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #d4af37;
+      display: inline-block;
+    }
+
+    .description {
+      max-width: 600px;
+      margin: 25px auto;
+      line-height: 1.7;
+      color: #555;
+      font-size: 16px;
+    }
+
+    .details {
+      margin-top: 35px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .detail {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .label {
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .value {
+      margin-top: 6px;
+      font-weight: bold;
+      font-size: 15px;
+      word-break: break-word;
+    }
+
+    .seal {
+      margin: 35px auto 0;
+      width: 90px;
+      height: 90px;
+      border: 3px solid #d4af37;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+
+    .loading,
+    .error {
+      text-align: center;
+      padding: 50px 20px;
+      font-size: 18px;
+    }
+
+    .error {
+      color: #c00;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+
+      .inner {
+        padding: 35px 15px;
+      }
+
+      .logo {
+        font-size: 30px;
+      }
+
+      .title {
+        font-size: 30px;
+      }
+
+      .name {
+        font-size: 30px;
+      }
+
+      .subtitle {
+        font-size: 11px;
+      }
+
+      .details {
+        text-align: center;
+      }
+
+      .detail {
+        min-width: 100%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div
+  id="loading"
+  class="loading"
+>
+  Loading Certificate...
+</div>
+
+
+<div
+  id="error"
+  class="error hidden"
+>
+</div>
+
+
+<div
+  id="certificate"
+  class="certificate hidden"
+>
+
+  <div class="inner">
+
+    <div class="logo">
+      BOSSORNOT
+    </div>
+
+    <div class="subtitle">
+      VERIFIED CERTIFICATE
+    </div>
+
+
+    <h1 class="title">
+      BOSS CERTIFICATE
+    </h1>
+
+
+    <div class="certifies">
+      This certificate is proudly presented to
+    </div>
+
+
+    <div
+      id="name"
+      class="name"
+    >
+      -
+    </div>
+
+
+    <div class="description">
+
+      This certifies that the above
+      individual has successfully
+      completed the BossOrNot
+      verification process.
+
+    </div>
+
+
+    <div class="details">
+
+      <div class="detail">
+
+        <div class="label">
+          Certificate ID
+        </div>
+
+        <div
+          id="certificateId"
+          class="value"
+        >
+          -
+        </div>
+
+      </div>
+
+
+      <div class="detail">
+
+        <div class="label">
+          Issue Date
+        </div>
+
+        <div
+          id="date"
+          class="value"
+        >
+          -
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="seal">
+      ✓
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<script>
+
+
+// =================================
+// GET CERTIFICATE ID FROM URL
+// =================================
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const certificateId =
+  params.get("id");
+
+
+
+function escapeHtml(value) {
+
+  return String(
+    value ?? ""
+  )
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+
+// =================================
+// LOAD CERTIFICATE
+// =================================
+
+async function loadCertificate() {
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+  const error =
+    document.getElementById(
+      "error"
+    );
+
+  const certificate =
+    document.getElementById(
+      "certificate"
+    );
+
+
+  if (!certificateId) {
+
+    loading.classList.add(
+      "hidden"
+    );
+
+    error.textContent =
+      "Certificate ID မပါရှိပါ။";
+
+    error.classList.remove(
+      "hidden"
+    );
+
+    return;
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/certificate?id=" +
+        encodeURIComponent(
+          certificateId
+        )
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !data.ok
+    ) {
+
+      throw new Error(
+        data.message ||
+        "Certificate မတွေ့ပါ။"
+      );
+
+    }
+
+
+    // -------------------------------
+    // SHOW DATA
+    // -------------------------------
+
+    document.getElementById(
+      "name"
+    ).textContent =
+      data.certificate.name;
+
+
+    document.getElementById(
+      "certificateId"
+    ).textContent =
+      data.certificate.certificate_id;
+
+
+    const date =
+      new Date(
+        data.certificate.approved_at
+      );
+
+
+    document.getElementById(
+      "date"
+    ).textContent =
+      date.toLocaleDateString(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "long",
+          year: "numeric"
+        }
+      );
+
+
+    loading.classList.add(
+      "hidden"
+    );
+
+    certificate.classList.remove(
+      "hidden"
+    );
+
+
+  } catch (err) {
+
+    loading.classList.add(
+      "hidden"
+    );
+
+    error.textContent =
+      "❌ " +
+      (
+        err.message ||
+        "Certificate မရနိုင်ပါ။"
+      );
+
+    error.classList.remove(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+loadCertificate();
+
+
+</script>
+
+
+</body>
+
+</html>
