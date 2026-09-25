@@ -1,4 +1,4 @@
-const cfg={url:"YOUR_SUPABASE_URL",key:"YOUR_SUPABASE_ANON_KEY"};
+const cfg={url:"https://kmtuecypckhhdsonuvnu.supabase.co",key:"sb_publishable_l-Ek3faVssYGENChtAKoPw_ZJyDi7uK"};
 function copyText(id){navigator.clipboard.writeText(document.getElementById(id).textContent)}
 const form=document.getElementById("payform"),msg=document.getElementById("msg");
 form.addEventListener("submit",async e=>{
