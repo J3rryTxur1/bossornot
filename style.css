@@ -1,1587 +1,387 @@
 /* =========================================================
-   BOSSORNOT / WEALTH SHOWCASE
-   Premium Mobile UI
+   PAYMENT METHOD SELECTOR
+   KBZPay TOP / Wave Money BOTTOM
 ========================================================= */
 
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-html {
-  scroll-behavior: smooth;
-  background: #050606;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-
-  background:
-    radial-gradient(
-      circle at 50% -12%,
-      #292318 0%,
-      #10110f 30%,
-      #070808 62%,
-      #040505 100%
-    );
-
-  color: #fff;
-
-  font-family:
-    Arial,
-    "Noto Sans Myanmar",
-    "Myanmar Text",
-    sans-serif;
-
-  -webkit-font-smoothing: antialiased;
-}
-
-
-/* =========================================================
-   GLOBAL BUTTON RESET
-========================================================= */
-
-button,
-input,
-textarea {
-  font-family: inherit;
-}
-
-button {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  user-select: none;
-  outline: none;
-}
-
-button:focus,
-button:focus-visible {
-  outline: none;
-}
-
-
-/* =========================================================
-   MAIN WRAPPER
-========================================================= */
-
-.wrap {
-  width: calc(100% - 32px);
-  max-width: 520px;
-
-  margin: 24px auto 70px;
-}
-
-
-/* =========================================================
-   COMMON CARD
-========================================================= */
-
-.card {
+.method-picker {
   position: relative;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(24, 26, 25, 0.98),
-      rgba(10, 12, 12, 0.98)
-    );
-
-  border: 1px solid rgba(247, 196, 92, 0.24);
-
-  border-radius: 30px;
-
-  box-shadow:
-    0 28px 80px rgba(0, 0, 0, 0.58),
-    inset 0 1px 0 rgba(255, 255, 255, 0.035);
-
-  overflow: hidden;
-}
-
-
-/* Soft gold light */
-
-.card::before {
-  content: "";
-
-  position: absolute;
-
-  width: 240px;
-  height: 240px;
-
-  top: -155px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  background:
-    rgba(247, 196, 92, 0.12);
-
-  filter: blur(75px);
-
-  pointer-events: none;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
   text-align: center;
-
-  padding:
-    34px
-    24px
-    30px;
-}
-
-
-/* =========================================================
-   BRAND
-========================================================= */
-
-.brand {
-  position: relative;
-
-  color: #f7c45c;
-
-  font-size: 16px;
-
-  font-weight: 800;
-
-  letter-spacing: 4px;
-
-  margin-bottom: 32px;
-
-  text-shadow:
-    0 0 20px rgba(247, 196, 92, 0.08);
-}
-
-.brand .crown {
-  margin-right: 5px;
-
-  font-size: 18px;
-}
-
-.brand span:not(.crown) {
-  font-weight: 400;
-
-  font-size: 14px;
-
-  letter-spacing: 3px;
-
-  margin-left: 5px;
-}
-
-
-/* =========================================================
-   HERO TITLE
-========================================================= */
-
-.hero h1 {
-  position: relative;
-
-  margin: 0;
-
-  font-size:
-    clamp(34px, 8vw, 50px);
-
-  line-height: 1.42;
-
-  font-weight: 800;
-
-  letter-spacing: -1.5px;
-}
-
-.hero h1 b {
-  display: inline-block;
-
-  color: #f7c45c;
-
-  margin-top: 2px;
-
-  text-shadow:
-    0 0 28px rgba(247, 196, 92, 0.16);
-}
-
-
-/* =========================================================
-   HERO DESCRIPTION
-========================================================= */
-
-.hero p {
-  position: relative;
-
-  margin:
-    24px
-    auto
-    27px;
-
-  max-width: 440px;
-
-  color: #a7aaab;
-
-  font-size: 16px;
-
-  line-height: 1.8;
-}
-
-
-/* =========================================================
-   PREMIUM CTA BUTTON
-========================================================= */
-
-.cta {
-  position: relative;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 10px;
-
-  width: 100%;
-
-  min-height: 64px;
-
-  padding: 0 22px;
-
-  border: 0;
-
-  border-radius: 20px;
-
-  overflow: hidden;
-
-  cursor: pointer;
-
-  color: #111;
-
-  font-size: 19px;
-
-  font-weight: 800;
-
-  background:
-    linear-gradient(
-      110deg,
-      #e7a12d 0%,
-      #ffd66d 25%,
-      #f5b942 50%,
-      #ffe07d 75%,
-      #e7a12d 100%
-    );
-
-  background-size: 260% 100%;
-
-  box-shadow:
-    0 13px 36px rgba(235, 168, 48, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
-
-  animation:
-    goldFlow 5s ease-in-out infinite;
-
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease;
-}
-
-
-/* Button text must stay above shine */
-
-.cta .btn-text,
-.cta .btn-arrow {
-  position: relative;
-
-  z-index: 3;
-}
-
-
-/* Arrow */
-
-.btn-arrow {
-  font-size: 24px;
-
-  line-height: 1;
-
-  transition:
-    transform 0.25s ease;
-}
-
-
-/* Moving shine */
-
-.cta::before {
-  content: "";
-
-  position: absolute;
-
-  z-index: 1;
-
-  top: 0;
-  left: -80%;
-
-  width: 45%;
-  height: 100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.48),
-      transparent
-    );
-
-  transform: skewX(-20deg);
-
-  animation:
-    buttonShine 4s ease-in-out infinite;
-
-  pointer-events: none;
-}
-
-
-/* Outer glow */
-
-.cta::after {
-  content: "";
-
-  position: absolute;
-
-  z-index: 0;
-
-  inset: -2px;
-
-  border-radius: inherit;
-
-  box-shadow:
-    0 0 0 rgba(247, 196, 92, 0);
-
-  animation:
-    buttonGlow 3s ease-in-out infinite;
-
-  pointer-events: none;
-}
-
-
-/* Hover */
-
-.cta:hover {
-  transform:
-    translateY(-2px)
-    scale(1.01);
-
-  box-shadow:
-    0 18px 48px rgba(235, 168, 48, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.48);
-}
-
-.cta:hover .btn-arrow {
-  transform: translateX(4px);
-}
-
-
-/* IMPORTANT:
-   Remove blue Android tap/focus effect */
-
-.cta:focus,
-.cta:focus-visible,
-.cta:active {
-  outline: none;
-
-  -webkit-tap-highlight-color: transparent;
-}
-
-
-/* Click animation */
-
-.cta.clicked {
-  animation:
-    buttonClick
-    0.55s
-    cubic-bezier(.2, .8, .2, 1);
-}
-
-
-/* =========================================================
-   CTA ANIMATIONS
-========================================================= */
-
-@keyframes goldFlow {
-
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-
-}
-
-
-@keyframes buttonShine {
-
-  0% {
-    left: -80%;
-  }
-
-  45% {
-    left: 130%;
-  }
-
-  100% {
-    left: 130%;
-  }
-
-}
-
-
-@keyframes buttonGlow {
-
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 rgba(247, 196, 92, 0);
-  }
-
-  50% {
-    box-shadow:
-      0 0 28px rgba(247, 196, 92, 0.25);
-  }
-
-}
-
-
-@keyframes buttonClick {
-
-  0% {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(0.94);
-  }
-
-  65% {
-    transform: scale(1.035);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-
-}
-
-
-/* =========================================================
-   PAYMENT SECTION
-========================================================= */
-
-.payment-section {
-  display: none;
-
-  margin-top: 22px;
-
-  padding:
-    28px
-    22px;
-
-  opacity: 0;
-
-  transform:
-    translateY(55px)
-    scale(0.94);
-
-  transform-origin:
-    center top;
-}
-
-
-/* Show */
-
-.payment-section.show {
-  display: block;
-
-  animation:
-    paymentReveal
-    0.9s
-    cubic-bezier(.16, 1, .3, 1)
-    forwards;
-}
-
-
-/* =========================================================
-   PAYMENT REVEAL
-========================================================= */
-
-@keyframes paymentReveal {
-
-  0% {
-    opacity: 0;
-
-    transform:
-      translateY(55px)
-      scale(0.94);
-
-    filter: blur(8px);
-  }
-
-  45% {
-    opacity: 1;
-
-    filter: blur(0);
-  }
-
-  72% {
-    transform:
-      translateY(-5px)
-      scale(1.01);
-  }
-
-  100% {
-    opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
-  }
-
-}
-
-
-/* =========================================================
-   PAYMENT HEADER
-========================================================= */
-
-.payment-header {
-  position: relative;
 
   margin-bottom: 22px;
-}
-
-.payment-badge {
-  display: inline-flex;
-
-  align-items: center;
-
-  min-height: 25px;
-
-  padding:
-    5px
-    10px;
-
-  border-radius: 20px;
-
-  border:
-    1px solid rgba(247, 196, 92, 0.20);
-
-  background:
-    rgba(247, 196, 92, 0.07);
-
-  color: #d8ad55;
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  letter-spacing: 1.8px;
-}
-
-
-/* =========================================================
-   PAYMENT TITLE
-========================================================= */
-
-.payment-section h2 {
-  position: relative;
-
-  margin:
-    9px
-    0
-    10px;
-
-  font-size: 30px;
-
-  line-height: 1.25;
-
-  font-weight: 800;
-
-  letter-spacing: -0.8px;
 
   opacity: 0;
 
-  transform:
-    translateY(18px);
+  transform: translateY(15px);
 }
 
-.payment-section.show h2 {
+
+/* Show animation */
+
+.payment-section.show .method-picker {
   animation:
     contentUp
     0.6s
-    0.20s
+    0.08s
     cubic-bezier(.2, .8, .2, 1)
     forwards;
 }
 
 
-.payment-header p {
-  margin: 0;
+/* Title */
 
-  color: #929596;
+.method-title {
+  margin-bottom: 13px;
 
-  font-size: 14px;
-
-  line-height: 1.65;
-
-  opacity: 0;
-
-  transform:
-    translateY(15px);
-}
-
-.payment-section.show .payment-header p {
-  animation:
-    contentUp
-    0.6s
-    0.28s
-    cubic-bezier(.2, .8, .2, 1)
-    forwards;
-}
-
-
-/* =========================================================
-   TOTAL
-========================================================= */
-
-.total {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 14px;
-
-  padding:
-    19px
-    17px;
-
-  margin-bottom: 18px;
-
-  border-radius: 20px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #1e1a14,
-      #12100d
-    );
-
-  border:
-    1px solid rgba(247, 196, 92, 0.28);
-
-  opacity: 0;
-
-  transform:
-    translateY(18px);
-}
-
-.payment-section.show .total {
-  animation:
-    contentUp
-    0.6s
-    0.36s
-    cubic-bezier(.2, .8, .2, 1)
-    forwards;
-}
-
-
-.total-label {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-}
-
-
-.total-icon {
-  color: #f7c45c;
-
-  font-size: 12px;
-
-  text-shadow:
-    0 0 12px rgba(247, 196, 92, 0.4);
-}
-
-
-.total small {
-  display: block;
-
-  margin-bottom: 4px;
-
-  color: #8e9091;
-
-  font-size: 13px;
-}
-
-
-.total strong {
-  display: block;
-
-  color: #f7c45c;
-
-  font-size: 25px;
-
-  white-space: nowrap;
-
-  text-shadow:
-    0 0 20px rgba(247, 196, 92, 0.12);
-}
-
-
-.verified-badge {
-  width: 30px;
-  height: 30px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  background:
-    rgba(247, 196, 92, 0.10);
-
-  border:
-    1px solid rgba(247, 196, 92, 0.25);
-
-  color: #f7c45c;
-
-  font-size: 15px;
-}
-
-
-/* =========================================================
-   PAYMENT BOX
-========================================================= */
-
-.paybox {
-  padding:
-    18px;
-
-  border-radius: 22px;
-
-  background:
-    #0d0f0f;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.09);
-
-  opacity: 0;
-
-  transform:
-    translateY(18px);
-}
-
-.payment-section.show .paybox {
-  animation:
-    contentUp
-    0.6s
-    0.48s
-    cubic-bezier(.2, .8, .2, 1)
-    forwards;
-}
-
-
-/* =========================================================
-   PAYMENT ROW
-========================================================= */
-
-.paybox > .payment-row {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 14px;
-
-  min-height: 56px;
-
-  padding:
-    14px
-    0;
-
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.07);
-}
-
-
-.paybox > .payment-row > span {
-  color: #8f9293;
-
-  font-size: 14px;
-}
-
-
-.paybox > .payment-row > b {
-  color: #f2f3f3;
-
-  font-size: 16px;
-
-  text-align: right;
-}
-
-
-/* =========================================================
-   ACCOUNT
-========================================================= */
-
-.account-value {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: flex-end;
-
-  gap: 8px;
-}
-
-
-.account-value b {
-  color: #fff;
-
-  font-size: 15px;
-
-  letter-spacing: 0.3px;
-}
-
-
-/* =========================================================
-   COPY BUTTON
-========================================================= */
-
-.copy-btn {
-  min-height: 34px;
-
-  padding:
-    7px
-    12px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.13);
-
-  border-radius: 11px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #242727,
-      #191b1b
-    );
-
-  color: #fff;
-
-  font-size: 12px;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.18s ease,
-    background 0.18s ease;
-}
-
-
-.copy-btn:hover {
-  background:
-    linear-gradient(
-      145deg,
-      #303333,
-      #202222
-    );
-}
-
-
-.copy-btn:active {
-  transform:
-    scale(0.94);
-}
-
-
-/* =========================================================
-   QR BOX
-========================================================= */
-
-.qrbox {
-  margin-top: 18px;
-
-  padding:
-    18px
-    14px
-    16px;
-
-  border-radius: 19px;
-
-  border:
-    1px solid rgba(247, 196, 92, 0.20);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(247, 196, 92, 0.025),
-      rgba(255, 255, 255, 0.015)
-    );
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  flex-direction: column;
-
-  text-align: center;
-}
-
-
-.qr-title {
-  color: #f7c45c;
+  color: #f1f1f1;
 
   font-size: 17px;
 
   font-weight: 700;
 
-  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
 
-.qr-image-wrap {
-  width: 190px;
-  height: 190px;
+/* =========================================
+   METHOD LIST
 
-  padding: 9px;
+   KBZPay = TOP
+   Wave Money = BOTTOM
+========================================= */
 
-  background: #fff;
+.payment-methods {
 
-  border-radius: 15px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.35);
-}
-
-
-.qr-image {
-  display: block;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-
-  border-radius: 7px;
-}
-
-
-.qrbox small {
-  display: block;
-
-  margin-top: 11px;
-
-  color: #777b7c;
-
-  font-size: 12px;
-
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
-
-#payform {
   display: flex;
 
   flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
 
   gap: 9px;
 
-  margin-top: 22px;
-
-  opacity: 0;
-
-  transform:
-    translateY(18px);
-}
-
-.payment-section.show #payform {
-  animation:
-    contentUp
-    0.6s
-    0.60s
-    cubic-bezier(.2, .8, .2, 1)
-    forwards;
 }
 
 
-.form-group {
+/* =========================================
+   METHOD CARD
+========================================= */
+
+.method-card {
+
+  position: relative;
+
+  width: 108px;
+
+  min-height: 88px;
+
+  padding: 9px 8px;
+
   display: flex;
 
   flex-direction: column;
 
-  gap: 8px;
+  align-items: center;
 
-  margin-bottom: 5px;
-}
+  justify-content: center;
 
+  gap: 6px;
 
-#payform label {
-  color: #b8babb;
+  border-radius: 16px;
 
-  font-size: 14px;
-
-  font-weight: 600;
-}
-
-
-#payform label span {
-  color: #f7c45c;
-}
-
-
-/* =========================================================
-   INPUT
-========================================================= */
-
-#payform input {
-  width: 100%;
-
-  min-height: 54px;
-
-  padding:
-    0
-    15px;
-
-  border-radius: 15px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255,255,255,0.10);
 
   background:
-    #0f1111;
+    linear-gradient(
+      145deg,
+      #151817,
+      #0d0f0f
+    );
 
   color: #fff;
 
-  font-size: 15px;
-
-  outline: none;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-
-#payform input:focus {
-  outline: none;
-
-  border-color:
-    rgba(247, 196, 92, 0.48);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(247, 196, 92, 0.07);
-}
-
-
-#payform input::placeholder {
-  color: #5e6263;
-}
-
-
-/* =========================================================
-   FILE UPLOAD
-========================================================= */
-
-.upload-box {
-  position: relative;
-
-  min-height: 72px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding:
-    10px
-    13px;
-
-  border:
-    1px dashed rgba(247, 196, 92, 0.28);
-
-  border-radius: 15px;
-
-  background:
-    rgba(247, 196, 92, 0.025);
+  cursor: pointer;
 
   overflow: hidden;
+
+  outline: none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 
-.upload-icon {
-  width: 38px;
-  height: 38px;
+/* Selected */
+
+.method-card.active {
+
+  border-color:
+    rgba(247,196,92,0.72);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(247,196,92,0.13),
+      rgba(247,196,92,0.035)
+    );
+
+  box-shadow:
+    0 8px 26px
+    rgba(247,196,92,0.12),
+
+    inset 0 1px 0
+    rgba(255,255,255,0.05);
+
+}
+
+
+/* Small gold selected line */
+
+.method-card.active::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 18px;
+
+  right: 18px;
+
+  bottom: 0;
+
+  height: 2px;
+
+  border-radius: 2px;
+
+  background: #f7c45c;
+
+  box-shadow:
+    0 0 10px
+    rgba(247,196,92,0.55);
+
+}
+
+
+/* Touch */
+
+.method-card:active {
+
+  transform:
+    scale(0.94);
+
+}
+
+
+/* Remove focus */
+
+.method-card:focus,
+.method-card:focus-visible {
+
+  outline: none;
+
+}
+
+
+/* =========================================
+   LOGO CONTAINER
+========================================= */
+
+.method-logo {
+
+  width: 42px;
+
+  height: 42px;
 
   flex-shrink: 0;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
-  border-radius: 12px;
+  overflow: hidden;
 
-  background:
-    rgba(247, 196, 92, 0.10);
+  border-radius: 10px;
+
+  background: #fff;
+
+}
+
+
+/* =========================================
+   ACTUAL LOGO
+
+   Both logos = EXACT SAME BOX
+========================================= */
+
+.method-logo img {
+
+  display: block;
+
+  width: 42px;
+
+  height: 42px;
+
+  object-fit: contain;
+
+  object-position: center;
+
+  border-radius: 9px;
+
+}
+
+
+/* =========================================
+   METHOD NAME
+========================================= */
+
+.method-name {
+
+  color: #e7e7e7;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+}
+
+
+/* Selected name */
+
+.method-card.active .method-name {
 
   color: #f7c45c;
 
-  font-size: 20px;
 }
 
 
-.upload-text {
-  min-width: 0;
+/* =========================================
+   PAYMENT INFORMATION SWITCH ANIMATION
+========================================= */
 
-  display: flex;
+.paybox {
 
-  flex-direction: column;
-
-  gap: 3px;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 
-.upload-text strong {
-  color: #e5e6e6;
-
-  font-size: 13px;
-}
-
-
-.upload-text small {
-  color: #6f7374;
-
-  font-size: 11px;
-}
-
-
-/* Native file input */
-
-#payform input[type="file"] {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  min-height: 0;
-
-  padding: 0;
-
-  opacity: 0;
-
-  cursor: pointer;
-
-  border: 0;
-
-  background: transparent;
-}
-
-
-/* =========================================================
-   SUBMIT BUTTON
-========================================================= */
-
-#payform .wide {
-  margin-top: 8px;
-}
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-.msg {
-  margin:
-    18px
-    0
-    0;
-
-  color: #aaa;
-
-  text-align: center;
-
-  line-height: 1.7;
-
-  font-size: 14px;
-}
-
-
-/* =========================================================
-   CONTENT REVEAL
-========================================================= */
-
-@keyframes contentUp {
-
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(18px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-
-}
-
-
-/* =========================================================
+/* =========================================
    MOBILE
-========================================================= */
+========================================= */
 
 @media (max-width: 600px) {
 
-  .wrap {
-    width: calc(100% - 30px);
+  .method-picker {
 
-    max-width: 470px;
+    margin-bottom: 20px;
 
-    margin:
-      20px
-      auto
-      60px;
   }
 
 
-  .card {
-    border-radius: 27px;
+  .method-title {
+
+    font-size: 16px;
+
+    margin-bottom: 12px;
+
   }
 
 
-  .hero {
-    padding:
-      30px
-      19px
-      27px;
+  .payment-methods {
+
+    gap: 8px;
+
   }
 
 
-  .brand {
-    font-size: 15px;
+  .method-card {
 
-    letter-spacing: 3px;
+    width: 102px;
 
-    margin-bottom: 27px;
+    min-height: 82px;
+
+    padding: 8px;
+
+    border-radius: 15px;
+
   }
 
 
-  .brand .crown {
-    font-size: 17px;
+  .method-logo {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 9px;
+
   }
 
 
-  .brand span:not(.crown) {
-    font-size: 12px;
+  .method-logo img {
 
-    letter-spacing: 2px;
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 8px;
+
   }
 
 
-  .hero h1 {
-    font-size: 35px;
+  .method-name {
 
-    line-height: 1.43;
-  }
+    font-size: 10px;
 
-
-  .hero p {
-    margin:
-      22px
-      auto
-      24px;
-
-    font-size: 15px;
-
-    line-height: 1.75;
-  }
-
-
-  .cta {
-    min-height: 61px;
-
-    border-radius: 18px;
-
-    font-size: 18px;
-  }
-
-
-  .payment-section {
-    padding:
-      25px
-      18px;
-  }
-
-
-  .payment-section h2 {
-    font-size: 28px;
-  }
-
-
-  .payment-header p {
-    font-size: 13px;
-  }
-
-
-  .total {
-    padding:
-      18px
-      15px;
-  }
-
-
-  .total strong {
-    font-size: 22px;
-  }
-
-
-  .paybox {
-    padding:
-      16px;
-  }
-
-
-  .paybox > .payment-row {
-    min-height: 54px;
-
-    padding:
-      13px
-      0;
-  }
-
-
-  .paybox > .payment-row > span {
-    font-size: 13px;
-  }
-
-
-  .paybox > .payment-row > b {
-    font-size: 14px;
-  }
-
-
-  .account-value {
-    gap: 6px;
-  }
-
-
-  .account-value b {
-    font-size: 13px;
-  }
-
-
-  .copy-btn {
-    min-height: 32px;
-
-    padding:
-      6px
-      10px;
-
-    font-size: 11px;
-  }
-
-
-  .qr-image-wrap {
-    width: 175px;
-    height: 175px;
-  }
-
-
-  .qrbox small {
-    font-size: 11px;
-  }
-
-
-  #payform input {
-    min-height: 53px;
-
-    font-size: 15px;
-  }
-
-
-  .upload-box {
-    min-height: 68px;
   }
 
 }
 
 
-/* =========================================================
+/* =========================================
    VERY SMALL PHONES
-========================================================= */
+========================================= */
 
 @media (max-width: 380px) {
 
-  .wrap {
-    width:
-      calc(100% - 22px);
+  .method-card {
+
+    width: 96px;
+
+    min-height: 78px;
+
   }
 
 
-  .hero {
-    padding:
-      27px
-      16px
-      24px;
+  .method-logo {
+
+    width: 36px;
+
+    height: 36px;
+
   }
 
 
-  .hero h1 {
-    font-size: 32px;
+  .method-logo img {
+
+    width: 36px;
+
+    height: 36px;
+
   }
 
-
-  .total strong {
-    font-size: 20px;
-  }
-
-
-  .qr-image-wrap {
-    width: 160px;
-    height: 160px;
-  }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  html {
-    scroll-behavior: auto;
-  }
-
-
-  .cta,
-  .cta::before,
-  .cta::after,
-  .payment-section.show,
-  .payment-section.show h2,
-  .payment-section.show .payment-header p,
-  .payment-section.show .total,
-  .payment-section.show .paybox,
-  .payment-section.show #payform {
-    animation: none !important;
-  }
-
-}
-
-/* =========================================================
-   CENTERED MOBILE HERO
-========================================================= */
-
-@media (max-width: 600px) {
-
-  body {
-    min-height: 100vh;
-  }
-
-  .wrap {
-    width: calc(100% - 28px);
-    max-width: 470px;
-
-    min-height: 100vh;
-
-    margin: 0 auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    padding: 18px 0 30px;
-  }
-
-  .hero {
-    padding: 26px 18px 24px;
-  }
-
-  .brand {
-    margin-bottom: 22px;
-  }
-
-  .hero h1 {
-    font-size: 31px;
-    line-height: 1.38;
-  }
-
-  .hero p {
-    margin: 18px auto 21px;
-    font-size: 14px;
-    line-height: 1.65;
-  }
-
-  .cta {
-    min-height: 56px;
-    border-radius: 17px;
-    font-size: 17px;
-  }
-
-}
-
-body {
-  font-family:
-    "Noto Sans Myanmar",
-    sans-serif;
-}
-
-.hero h1,
-.hero h1 b {
-  font-family:
-    "Noto Serif Myanmar",
-    "Noto Sans Myanmar",
-    sans-serif;
-
-  font-weight: 800;
-}
-
-.hero p,
-.payment-section,
-#payform {
-  font-family:
-    "Noto Sans Myanmar",
-    sans-serif;
 }
