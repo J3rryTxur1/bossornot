@@ -898,3 +898,92 @@ button {
     transition-duration:.01ms !important;
   }
 }
+
+/* =========================================
+   PREMIUM SMALL CENTER HERO
+========================================= */
+
+@media (max-width: 600px) {
+
+  .wrap {
+    width: 100%;
+    padding: 22px 0 60px;
+  }
+
+  /* Hero card ကို အလယ်တည့်တည့် + ပိုသေး */
+  .hero {
+    width: calc(100% - 46px);
+    margin: 0 auto;
+
+    min-height: 0;
+
+    padding: 34px 24px 32px;
+
+    border-radius: 24px;
+  }
+
+  /* အတွင်းစာတွေကို center */
+  .brand {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero h1 {
+    text-align: center;
+
+    font-size: 36px;
+    line-height: 1.4;
+
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    max-width: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  /* Button */
+  .hero .cta {
+    width: 100%;
+
+    min-height: 54px;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+/* =========================================
+   SMALLER PHONES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .hero {
+    width: calc(100% - 36px);
+
+    padding: 30px 20px 28px;
+
+    border-radius: 22px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 12px;
+  }
+
+  .hero .cta {
+    min-height: 52px;
+  }
+}
