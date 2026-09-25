@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>BossOrNot Admin</title>
 
@@ -56,6 +61,11 @@
       color: white;
     }
 
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
     .hidden {
       display: none;
     }
@@ -81,8 +91,19 @@
       font-size: 13px;
     }
 
+    .status.approved {
+      background: #d1e7dd;
+      color: #0f5132;
+    }
+
+    .status.rejected {
+      background: #f8d7da;
+      color: #842029;
+    }
+
     .row {
-      margin: 7px 0;
+      margin: 8px 0;
+      word-break: break-word;
     }
 
     .label {
@@ -96,7 +117,7 @@
 
     .slip {
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
       margin-top: 12px;
       border-radius: 12px;
       border: 1px solid #ddd;
@@ -113,6 +134,21 @@
       border-radius: 10px;
     }
 
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .approve-btn {
+      background: #198754;
+    }
+
+    .reject-btn {
+      background: #dc3545;
+    }
+
     .error {
       color: #c00;
       font-size: 13px;
@@ -120,15 +156,35 @@
       word-break: break-word;
     }
 
+    .success {
+      color: #198754;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .certificate {
+      background: #f0fff5;
+      border: 1px solid #b7dfc8;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 10px;
+      word-break: break-word;
+    }
+
   </style>
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
+
+  <!-- ========================= -->
   <!-- LOGIN -->
+  <!-- ========================= -->
 
   <div id="loginCard" class="card">
 
@@ -144,14 +200,24 @@
       Login
     </button>
 
-    <div id="loginMsg" class="msg"></div>
+    <div
+      id="loginMsg"
+      class="msg"
+    ></div>
 
   </div>
 
 
-  <!-- DASHBOARD -->
 
-  <div id="dashboard" class="hidden">
+  <!-- ========================= -->
+  <!-- DASHBOARD -->
+  <!-- ========================= -->
+
+  <div
+    id="dashboard"
+    class="hidden"
+  >
+
 
     <div class="card">
 
@@ -168,11 +234,14 @@
         Payment Requests
       </p>
 
-      <button onclick="loadPayments()">
+      <button
+        onclick="loadPayments()"
+      >
         Refresh
       </button>
 
     </div>
+
 
 
     <div class="card">
@@ -183,13 +252,20 @@
 
     </div>
 
+
   </div>
+
 
 </div>
 
 
+
 <script>
 
+
+// =====================================
+// ADMIN TOKEN
+// =====================================
 
 let adminToken =
   localStorage.getItem(
@@ -197,6 +273,10 @@ let adminToken =
   );
 
 
+
+// =====================================
+// SHOW DASHBOARD
+// =====================================
 
 function showDashboard() {
 
@@ -213,6 +293,10 @@ function showDashboard() {
 }
 
 
+
+// =====================================
+// LOGOUT
+// =====================================
 
 function logout() {
 
@@ -233,6 +317,10 @@ function logout() {
 }
 
 
+
+// =====================================
+// LOGIN
+// =====================================
 
 async function login() {
 
@@ -312,6 +400,9 @@ async function login() {
       .value = "";
 
 
+    msg.textContent = "";
+
+
     showDashboard();
 
 
@@ -326,6 +417,10 @@ async function login() {
 }
 
 
+
+// =====================================
+// LOAD PAYMENTS
+// =====================================
 
 async function loadPayments() {
 
@@ -358,6 +453,10 @@ async function loadPayments() {
       await response.json();
 
 
+    // -------------------------------
+    // TOKEN EXPIRED
+    // -------------------------------
+
     if (
       response.status === 401
     ) {
@@ -367,6 +466,10 @@ async function loadPayments() {
       return;
     }
 
+
+    // -------------------------------
+    // API ERROR
+    // -------------------------------
 
     if (
       !response.ok ||
@@ -390,6 +493,10 @@ async function loadPayments() {
     }
 
 
+    // -------------------------------
+    // NO PAYMENTS
+    // -------------------------------
+
     if (
       !data.payments ||
       !data.payments.length
@@ -402,191 +509,17 @@ async function loadPayments() {
     }
 
 
+    // -------------------------------
+    // PAYMENT CARDS
+    // -------------------------------
+
     box.innerHTML =
       data.payments
         .map(payment => {
 
-
-          let slipHtml = "";
-
-
-          if (
-            payment.slip_url
-          ) {
-
-            slipHtml = `
-
-              <div class="row">
-
-                <span class="label">
-                  Payment Slip:
-                </span>
-
-                <br>
-
-                <img
-                  class="slip"
-                  src="${escapeHtml(
-                    payment.slip_url
-                  )}"
-                  alt="Payment Slip"
-                  loading="lazy"
-                >
-
-                <br>
-
-                <a
-                  class="slip-button"
-                  href="${escapeHtml(
-                    payment.slip_url
-                  )}"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  🔍 View Slip Full Size
-                </a>
-
-              </div>
-
-            `;
-
-          } else {
-
-            slipHtml = `
-
-              <div class="row">
-
-                <span class="label">
-                  Payment Slip:
-                </span>
-
-                <div class="error">
-                  Slip URL မရပါ
-                </div>
-
-                ${
-                  payment.slip_error
-                    ? `
-                      <div class="error">
-                        ${escapeHtml(
-                          payment.slip_error
-                        )}
-                      </div>
-                    `
-                    : ""
-                }
-
-              </div>
-
-            `;
-
-          }
-
-
-          return `
-
-            <div class="payment">
-
-              <div class="row">
-
-                <span class="label">
-                  Order ID:
-                </span>
-
-                ${escapeHtml(
-                  payment.order_id
-                )}
-
-              </div>
-
-
-              <div class="row">
-
-                <span class="label">
-                  Name:
-                </span>
-
-                ${escapeHtml(
-                  payment.name
-                )}
-
-              </div>
-
-
-              <div class="row">
-
-                <span class="label">
-                  Email:
-                </span>
-
-                ${escapeHtml(
-                  payment.email
-                )}
-
-              </div>
-
-
-              <div class="row">
-
-                <span class="label">
-                  Amount:
-                </span>
-
-                ${payment.amount}
-                MMK
-
-              </div>
-
-
-              <div class="row">
-
-                <span class="label">
-                  Method:
-                </span>
-
-                ${escapeHtml(
-                  payment.method
-                )}
-
-              </div>
-
-
-              <div class="row">
-
-                <span class="label">
-                  Status:
-                </span>
-
-                <span class="status">
-
-                  ${escapeHtml(
-                    payment.status
-                  )}
-
-                </span>
-
-              </div>
-
-
-              <div class="row">
-
-                <span class="label">
-                  Created:
-                </span>
-
-                ${escapeHtml(
-                  payment.created_at
-                )}
-
-              </div>
-
-
-              ${slipHtml}
-
-
-            </div>
-
-          `;
+          return createPaymentCard(
+            payment
+          );
 
         })
         .join("");
@@ -606,6 +539,542 @@ async function loadPayments() {
 }
 
 
+
+// =====================================
+// CREATE PAYMENT CARD
+// =====================================
+
+function createPaymentCard(payment) {
+
+  const status =
+    String(
+      payment.status || ""
+    );
+
+
+  // -----------------------------------
+  // STATUS CLASS
+  // -----------------------------------
+
+  let statusClass = "";
+
+  if (status === "approved") {
+    statusClass = "approved";
+  }
+
+  if (status === "rejected") {
+    statusClass = "rejected";
+  }
+
+
+
+  // -----------------------------------
+  // SLIP HTML
+  // -----------------------------------
+
+  let slipHtml = "";
+
+
+  if (payment.slip_url) {
+
+    slipHtml = `
+
+      <div class="row">
+
+        <span class="label">
+          Payment Slip:
+        </span>
+
+        <br>
+
+        <img
+          class="slip"
+          src="${escapeHtml(
+            payment.slip_url
+          )}"
+          alt="Payment Slip"
+          loading="lazy"
+        >
+
+        <a
+          class="slip-button"
+          href="${escapeHtml(
+            payment.slip_url
+          )}"
+          target="_blank"
+          rel="noopener"
+        >
+          🔍 View Slip Full Size
+        </a>
+
+      </div>
+
+    `;
+
+  } else {
+
+    slipHtml = `
+
+      <div class="row">
+
+        <span class="label">
+          Payment Slip:
+        </span>
+
+        <div class="error">
+          Slip URL မရပါ
+        </div>
+
+        ${
+          payment.slip_error
+            ? `
+              <div class="error">
+                ${escapeHtml(
+                  payment.slip_error
+                )}
+              </div>
+            `
+            : ""
+        }
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  // -----------------------------------
+  // CERTIFICATE
+  // -----------------------------------
+
+  let certificateHtml = "";
+
+
+  if (
+    payment.certificate_id
+  ) {
+
+    certificateHtml = `
+
+      <div class="certificate">
+
+        <b>
+          Certificate ID:
+        </b>
+
+        ${escapeHtml(
+          payment.certificate_id
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  // -----------------------------------
+  // ACTION BUTTONS
+  // -----------------------------------
+
+  let actionHtml = "";
+
+
+  if (
+    status === "pending"
+  ) {
+
+    const orderId =
+      escapeHtml(
+        payment.order_id
+      );
+
+
+    actionHtml = `
+
+      <div class="actions">
+
+        <button
+          class="approve-btn"
+          onclick="approvePayment('${orderId}')"
+        >
+          ✅ Approve
+        </button>
+
+        <button
+          class="reject-btn"
+          onclick="rejectPayment('${orderId}')"
+        >
+          ❌ Reject
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+
+
+  // -----------------------------------
+  // RETURN CARD
+  // -----------------------------------
+
+  return `
+
+    <div class="payment">
+
+      <div class="row">
+
+        <span class="label">
+          Order ID:
+        </span>
+
+        ${escapeHtml(
+          payment.order_id
+        )}
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="label">
+          Name:
+        </span>
+
+        ${escapeHtml(
+          payment.name
+        )}
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="label">
+          Email:
+        </span>
+
+        ${escapeHtml(
+          payment.email
+        )}
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="label">
+          Amount:
+        </span>
+
+        ${escapeHtml(
+          payment.amount
+        )}
+        MMK
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="label">
+          Method:
+        </span>
+
+        ${escapeHtml(
+          payment.method
+        )}
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="label">
+          Status:
+        </span>
+
+        <span
+          class="status ${statusClass}"
+        >
+          ${escapeHtml(
+            payment.status
+          )}
+        </span>
+
+      </div>
+
+
+      <div class="row">
+
+        <span class="label">
+          Created:
+        </span>
+
+        ${escapeHtml(
+          payment.created_at
+        )}
+
+      </div>
+
+
+      ${slipHtml}
+
+
+      ${certificateHtml}
+
+
+      ${actionHtml}
+
+
+    </div>
+
+  `;
+
+}
+
+
+
+// =====================================
+// APPROVE PAYMENT
+// =====================================
+
+async function approvePayment(
+  orderId
+) {
+
+  const confirmed =
+    confirm(
+      "ဒီ Payment ကို Approve လုပ်မှာ သေချာပါသလား?"
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/approve",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "Authorization":
+              "Bearer " +
+              adminToken
+          },
+
+          body: JSON.stringify({
+            order_id: orderId,
+            action: "approve"
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    // -------------------------------
+    // SESSION EXPIRED
+    // -------------------------------
+
+    if (
+      response.status === 401
+    ) {
+
+      logout();
+
+      return;
+    }
+
+
+    // -------------------------------
+    // ERROR
+    // -------------------------------
+
+    if (
+      !response.ok ||
+      !data.ok
+    ) {
+
+      alert(
+        "❌ Approve မအောင်မြင်ပါ\n\n" +
+        (
+          data.message ||
+          "Unknown error"
+        ) +
+        "\n" +
+        (
+          data.details ||
+          ""
+        )
+      );
+
+      return;
+    }
+
+
+    // -------------------------------
+    // SUCCESS
+    // -------------------------------
+
+    alert(
+      "✅ Payment Approved!\n\n" +
+      "Certificate ID: " +
+      data.certificate_id
+    );
+
+
+    // Reload payment list
+
+    loadPayments();
+
+
+  } catch (error) {
+
+    alert(
+      "❌ Connection Error\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+// =====================================
+// REJECT PAYMENT
+// =====================================
+
+async function rejectPayment(
+  orderId
+) {
+
+  const confirmed =
+    confirm(
+      "ဒီ Payment ကို Reject လုပ်မှာ သေချာပါသလား?"
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/approve",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+
+            "Authorization":
+              "Bearer " +
+              adminToken
+          },
+
+          body: JSON.stringify({
+            order_id: orderId,
+            action: "reject"
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    // -------------------------------
+    // SESSION EXPIRED
+    // -------------------------------
+
+    if (
+      response.status === 401
+    ) {
+
+      logout();
+
+      return;
+    }
+
+
+    // -------------------------------
+    // ERROR
+    // -------------------------------
+
+    if (
+      !response.ok ||
+      !data.ok
+    ) {
+
+      alert(
+        "❌ Reject မအောင်မြင်ပါ\n\n" +
+        (
+          data.message ||
+          "Unknown error"
+        ) +
+        "\n" +
+        (
+          data.details ||
+          ""
+        )
+      );
+
+      return;
+    }
+
+
+    // -------------------------------
+    // SUCCESS
+    // -------------------------------
+
+    alert(
+      "❌ Payment Rejected"
+    );
+
+
+    // Reload payment list
+
+    loadPayments();
+
+
+  } catch (error) {
+
+    alert(
+      "❌ Connection Error\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+// =====================================
+// ESCAPE HTML
+// =====================================
 
 function escapeHtml(value) {
 
@@ -642,7 +1111,9 @@ function escapeHtml(value) {
 
 
 
-// Auto login if token exists
+// =====================================
+// AUTO LOGIN
+// =====================================
 
 if (adminToken) {
 
@@ -652,6 +1123,7 @@ if (adminToken) {
 
 
 </script>
+
 
 </body>
 </html>
