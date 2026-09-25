@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="my">
+
 <head>
+
   <meta charset="utf-8">
 
   <meta
@@ -15,39 +17,65 @@
 
   <title>Wealth Showcase</title>
 
+  <!-- Premium Myanmar Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Noto+Serif+Myanmar:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Main CSS -->
   <link rel="stylesheet" href="/style.css">
+
 </head>
+
 
 <body>
 
 <main class="wrap">
 
-  <!-- HERO -->
+  <!-- =========================
+       HERO
+  ========================== -->
 
   <section class="hero card">
 
     <div class="brand">
+
       <span class="crown">♛</span>
+
       WEALTH
+
       <span>SHOWCASE</span>
+
     </div>
 
+
     <h1>
+
       သင်ချမ်းသာကြောင်း<br>
+
       <b>ပြသလိုက်ပါ</b>
+
     </h1>
 
+
     <p>
+
       50,000 MMK ပေးချေပြီး Transfer Slip တင်ပါ။<br>
+
       ငွေဝင်ရောက်မှုကို ကိုယ်တိုင်စစ်ဆေးပြီးမှ<br>
+
       Certificate ထုတ်ပေးပါမယ်။
+
     </p>
+
 
     <button
       type="button"
       class="cta"
       id="payBtn"
     >
+
       <span class="btn-text">
         50,000 MMK ပေးချေရန်
       </span>
@@ -55,12 +83,15 @@
       <span class="btn-arrow">
         →
       </span>
+
     </button>
 
   </section>
 
 
-  <!-- PAYMENT -->
+  <!-- =========================
+       PAYMENT
+  ========================== -->
 
   <section
     id="pay"
@@ -73,9 +104,11 @@
         SECURE PAYMENT
       </div>
 
+
       <h2>
         Complete your payment
       </h2>
+
 
       <p>
         အောက်ပါအချက်အလက်များအတိုင်း
@@ -85,13 +118,17 @@
     </div>
 
 
-    <!-- TOTAL -->
+    <!-- =========================
+         TOTAL
+    ========================== -->
 
     <div class="total">
 
       <div class="total-label">
 
-        <span class="total-icon">◆</span>
+        <span class="total-icon">
+          ◆
+        </span>
 
         <div>
 
@@ -107,6 +144,7 @@
 
       </div>
 
+
       <div class="verified-badge">
         ✓
       </div>
@@ -114,11 +152,14 @@
     </div>
 
 
-    <!-- PAYMENT INFORMATION -->
+    <!-- =========================
+         PAYMENT INFORMATION
+    ========================== -->
 
     <div class="paybox">
 
-      <!-- Payment -->
+
+      <!-- Payment Method -->
 
       <div class="payment-row">
 
@@ -175,13 +216,16 @@
       </div>
 
 
-      <!-- QR -->
+      <!-- =========================
+           QR CODE
+      ========================== -->
 
       <div class="qrbox">
 
         <div class="qr-title">
           KBZPay QR
         </div>
+
 
         <div class="qr-image-wrap">
 
@@ -193,6 +237,7 @@
 
         </div>
 
+
         <small>
           KBZPay ဖြင့် Scan ပြီး 50,000 MMK ပေးချေပါ
         </small>
@@ -202,18 +247,24 @@
     </div>
 
 
-    <!-- FORM -->
+    <!-- =========================
+         FORM
+    ========================== -->
 
     <form
       id="payform"
       autocomplete="on"
     >
 
+
+      <!-- Full Name -->
+
       <div class="form-group">
 
         <label for="name">
           Full Name <span>*</span>
         </label>
+
 
         <input
           id="name"
@@ -227,11 +278,14 @@
       </div>
 
 
+      <!-- Email -->
+
       <div class="form-group">
 
         <label for="email">
           Email Address <span>*</span>
         </label>
+
 
         <input
           id="email"
@@ -245,17 +299,21 @@
       </div>
 
 
+      <!-- Transfer Slip -->
+
       <div class="form-group">
 
         <label for="slip">
           Transfer Screenshot <span>*</span>
         </label>
 
+
         <div class="upload-box">
 
           <div class="upload-icon">
             ↑
           </div>
+
 
           <div class="upload-text">
 
@@ -269,6 +327,7 @@
 
           </div>
 
+
           <input
             id="slip"
             name="slip"
@@ -281,6 +340,8 @@
 
       </div>
 
+
+      <!-- Submit -->
 
       <button
         type="submit"
@@ -300,6 +361,8 @@
     </form>
 
 
+    <!-- Message -->
+
     <p
       id="msg"
       class="msg"
@@ -311,13 +374,21 @@
 </main>
 
 
+<!-- App JS -->
+
 <script src="/app.js"></script>
 
 
+<!-- Payment Reveal -->
+
 <script>
 
-const payBtn = document.getElementById("payBtn");
-const paymentSection = document.getElementById("pay");
+const payBtn =
+  document.getElementById("payBtn");
+
+const paymentSection =
+  document.getElementById("pay");
+
 
 payBtn.addEventListener("click", () => {
 
@@ -325,20 +396,22 @@ payBtn.addEventListener("click", () => {
 
   payBtn.blur();
 
-  payBtn.classList.remove("clicked");
 
-  /* Restart animation */
+  /* Restart button animation */
+
+  payBtn.classList.remove("clicked");
 
   void payBtn.offsetWidth;
 
   payBtn.classList.add("clicked");
 
 
-  /* Show payment */
+  /* Show payment section */
 
   setTimeout(() => {
 
     paymentSection.classList.add("show");
+
 
     setTimeout(() => {
 
@@ -355,5 +428,7 @@ payBtn.addEventListener("click", () => {
 
 </script>
 
+
 </body>
+
 </html>
