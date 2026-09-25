@@ -9,6 +9,10 @@ function json(data, status = 200) {
 }
 
 
+// =================================
+// BASE64 HELPERS
+// =================================
+
 function base64url(bytes) {
   let binary = "";
 
@@ -41,6 +45,10 @@ function fromBase64url(str) {
   );
 }
 
+
+// =================================
+// VERIFY ADMIN TOKEN
+// =================================
 
 async function verifyToken(token, password) {
 
@@ -119,6 +127,211 @@ async function verifyToken(token, password) {
 
 
 // =================================
+// ESCAPE HTML
+// =================================
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+// =================================
+// SEND CERTIFICATE EMAIL
+// =================================
+
+async function sendCertificateEmail(
+  ctx,
+  email,
+  name,
+  certificateId
+) {
+
+  const certificateUrl =
+    "https://bossornot.pages.dev/certificate.html?id=" +
+    encodeURIComponent(certificateId);
+
+  const safeName =
+    escapeHtml(name);
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="
+  margin:0;
+  padding:30px 15px;
+  background:#f1f3f6;
+  font-family:Arial,sans-serif;
+">
+
+  <div style="
+    max-width:600px;
+    margin:auto;
+    background:#ffffff;
+    border-radius:16px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+  ">
+
+    <h1 style="
+      margin:0 0 8px;
+      font-size:30px;
+      letter-spacing:2px;
+    ">
+      BOSSORNOT
+    </h1>
+
+    <p style="
+      color:#888;
+      letter-spacing:2px;
+      font-size:12px;
+    ">
+      VERIFIED CERTIFICATE
+    </p>
+
+    <div style="
+      margin:30px 0;
+      padding:25px;
+      border:2px solid #d4af37;
+      border-radius:12px;
+    ">
+
+      <p style="
+        margin:0 0 10px;
+        color:#666;
+      ">
+        Congratulations!
+      </p>
+
+      <h2 style="
+        margin:10px 0;
+        font-size:28px;
+      ">
+        ${safeName}
+      </h2>
+
+      <p style="
+        color:#666;
+        line-height:1.6;
+      ">
+        Your BossOrNot Certificate has been successfully verified.
+      </p>
+
+      <p style="
+        margin-top:20px;
+        font-size:14px;
+        color:#777;
+      ">
+        Certificate ID
+      </p>
+
+      <strong style="
+        font-size:18px;
+        letter-spacing:1px;
+      ">
+        ${escapeHtml(certificateId)}
+      </strong>
+
+    </div>
+
+    <a
+      href="${certificateUrl}"
+      style="
+        display:inline-block;
+        background:#111111;
+        color:#ffffff;
+        text-decoration:none;
+        padding:14px 28px;
+        border-radius:8px;
+        font-weight:bold;
+        font-size:16px;
+      "
+    >
+      View My Certificate
+    </a>
+
+    <p style="
+      margin-top:30px;
+      color:#999;
+      font-size:12px;
+      line-height:1.6;
+    ">
+      You can use this link anytime to view your verified certificate.
+    </p>
+
+  </div>
+
+</body>
+</html>
+`;
+
+
+  const response =
+    await fetch(
+      "https://api.resend.com/emails",
+      {
+        method: "POST",
+
+        headers: {
+          "Authorization":
+            `Bearer ${ctx.env.RESEND_API_KEY}`,
+
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+
+          from:
+            "BossOrNot <onboarding@resend.dev>",
+
+          to: [email],
+
+          subject:
+            "🏆 Your BossOrNot Certificate is Ready",
+
+          html:
+            html
+
+        })
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      `Resend error (${response.status}): ${text}`
+    );
+
+  }
+
+
+  const data =
+    JSON.parse(text);
+
+  return data;
+
+}
+
+
+// =================================
 // APPROVE / REJECT PAYMENT
 // POST /api/approve
 // =================================
@@ -147,6 +360,7 @@ export async function onRequestPost(ctx) {
         },
         401
       );
+
     }
 
 
@@ -166,6 +380,7 @@ export async function onRequestPost(ctx) {
         },
         500
       );
+
     }
 
 
@@ -186,6 +401,7 @@ export async function onRequestPost(ctx) {
         },
         401
       );
+
     }
 
 
@@ -213,6 +429,7 @@ export async function onRequestPost(ctx) {
         },
         400
       );
+
     }
 
 
@@ -229,12 +446,13 @@ export async function onRequestPost(ctx) {
         },
         400
       );
+
     }
 
 
-    // -----------------------------
+    // =================================
     // APPROVE
-    // -----------------------------
+    // =================================
 
     if (action === "approve") {
 
@@ -302,6 +520,7 @@ export async function onRequestPost(ctx) {
           },
           response.status
         );
+
       }
 
 
@@ -319,30 +538,109 @@ export async function onRequestPost(ctx) {
           },
           404
         );
+
       }
 
 
-      return json({
+      const payment =
+        rows[0];
 
-        ok: true,
 
-        message:
-          "Payment approved",
+      // -----------------------------
+      // CHECK RESEND API KEY
+      // -----------------------------
 
-        certificate_id:
-          certificateId,
+      if (!ctx.env.RESEND_API_KEY) {
 
-        payment:
-          rows[0]
+        return json({
 
-      });
+          ok: true,
+
+          message:
+            "Payment approved, but RESEND_API_KEY is not configured",
+
+          certificate_id:
+            certificateId,
+
+          email_sent:
+            false,
+
+          payment:
+            payment
+
+        });
+
+      }
+
+
+      // -----------------------------
+      // SEND CERTIFICATE EMAIL
+      // -----------------------------
+
+      try {
+
+        const emailResult =
+          await sendCertificateEmail(
+            ctx,
+            payment.email,
+            payment.name,
+            certificateId
+          );
+
+
+        return json({
+
+          ok: true,
+
+          message:
+            "Payment approved and certificate email sent",
+
+          certificate_id:
+            certificateId,
+
+          email_sent:
+            true,
+
+          email_id:
+            emailResult?.id || null,
+
+          payment:
+            payment
+
+        });
+
+
+      } catch (emailError) {
+
+        return json({
+
+          ok: true,
+
+          message:
+            "Payment approved, but certificate email failed",
+
+          certificate_id:
+            certificateId,
+
+          email_sent:
+            false,
+
+          email_error:
+            emailError.message,
+
+          payment:
+            payment
+
+        });
+
+      }
 
     }
 
 
-    // -----------------------------
+    // =================================
     // REJECT
-    // -----------------------------
+    // =================================
 
     if (action === "reject") {
 
@@ -396,6 +694,7 @@ export async function onRequestPost(ctx) {
           },
           response.status
         );
+
       }
 
 
@@ -413,6 +712,7 @@ export async function onRequestPost(ctx) {
           },
           404
         );
+
       }
 
 
@@ -429,6 +729,7 @@ export async function onRequestPost(ctx) {
       });
 
     }
+
 
   } catch (err) {
 
