@@ -1,263 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Noto+Serif+Myanmar:wght@600;700;800&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  background: #080909;
-}
-
-body {
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at 50% -10%, rgba(247,196,92,.10), transparent 34%),
-    linear-gradient(180deg,#080909 0%,#0d0f0f 55%,#080909 100%);
-  color: #f5f5f5;
-  font-family: "Noto Sans Myanmar",system-ui,sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-button,
-input {
-  font: inherit;
-}
-
-button {
-  -webkit-tap-highlight-color: transparent;
-}
-
-.wrap {
-  width: min(760px,calc(100% - 28px));
-  margin: 0 auto;
-  padding: 28px 0 70px;
-}
-
-.card {
-  position: relative;
-  border: 1px solid rgba(255,255,255,.075);
-  border-radius: 28px;
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),
-    #0d0f0f;
-  box-shadow:
-    0 28px 70px rgba(0,0,0,.38),
-    inset 0 1px 0 rgba(255,255,255,.035);
-}
-
 /* =========================
-   HERO
+   PAYMENT METHOD CARDS
 ========================= */
-
-.hero {
-  min-height: 520px;
-  padding: 54px 48px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 330px;
-  height: 330px;
-  top: -170px;
-  right: -110px;
-  border-radius: 50%;
-  background: rgba(247,196,92,.08);
-  filter: blur(12px);
-  pointer-events: none;
-}
-
-.brand {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 28px;
-  color: #f7c45c;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 2.4px;
-}
-
-.brand span:last-child {
-  color: #f5f5f5;
-}
-
-.crown {
-  color: #f7c45c;
-  font-size: 24px;
-  line-height: 1;
-}
-
-.hero h1 {
-  position: relative;
-  margin-bottom: 25px;
-  font-family: "Noto Serif Myanmar",serif;
-  font-size: clamp(40px,7vw,70px);
-  line-height: 1.3;
-  letter-spacing: -1.5px;
-  font-weight: 800;
-  color: #fff;
-}
-
-.hero h1 b {
-  color: #f7c45c;
-  font-weight: 800;
-}
-
-.hero p {
-  position: relative;
-  max-width: 620px;
-  margin-bottom: 32px;
-  color: #aeb3b1;
-  font-size: 16px;
-  line-height: 2;
-}
-
-.cta {
-  position: relative;
-  width: fit-content;
-  min-height: 58px;
-  padding: 0 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  border: 1px solid rgba(247,196,92,.65);
-  border-radius: 15px;
-  background: linear-gradient(135deg,#f7c45c,#d89b2d);
-  color: #111;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 800;
-  box-shadow:
-    0 14px 35px rgba(247,196,92,.16),
-    inset 0 1px 0 rgba(255,255,255,.45);
-  transition: transform .22s ease,box-shadow .22s ease,filter .22s ease;
-}
-
-.cta:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 18px 42px rgba(247,196,92,.22),
-    inset 0 1px 0 rgba(255,255,255,.45);
-}
-
-.cta:active,
-.cta.clicked {
-  transform: scale(.97);
-}
-
-.cta.wide {
-  width: 100%;
-  margin-top: 6px;
-}
-
-.btn-text {
-  white-space: nowrap;
-}
-
-.btn-arrow {
-  font-size: 24px;
-  line-height: 1;
-}
-
-/* =========================
-   PAYMENT SECTION
-========================= */
-
-.payment-section {
-  display: none;
-  margin-top: 24px;
-  padding: 38px 34px 42px;
-  overflow: hidden;
-}
-
-.payment-section.show {
-  display: block;
-  animation: sectionIn .55s cubic-bezier(.2,.8,.2,1) both;
-}
-
-@keyframes sectionIn {
-  from {
-    opacity: 0;
-    transform: translateY(22px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes contentUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =========================
-   PAYMENT METHOD
-========================= */
-
-.method-picker {
-  position: relative;
-  text-align: center;
-  margin-bottom: 28px;
-  opacity: 0;
-  transform: translateY(15px);
-}
-
-.payment-section.show .method-picker {
-  animation:
-    contentUp .6s .08s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-.method-title {
-  margin-bottom: 13px;
-  color: #f1f1f1;
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.4;
-}
 
 .payment-methods {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 8px;
 }
 
+/* Card ကို သေးအောင် */
 .method-card {
   position: relative;
-  width: 108px;
-  min-height: 88px;
-  padding: 9px 8px;
+
+  width: 92px;
+  height: 82px;
+
+  padding: 7px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  border-radius: 16px;
+
+  gap: 5px;
+
+  border-radius: 14px;
+
   border: 1px solid rgba(255,255,255,.10);
-  background: linear-gradient(145deg,#151817,#0d0f0f);
+
+  background:
+    linear-gradient(
+      145deg,
+      #151817,
+      #0d0f0f
+    );
+
   color: #fff;
+
   cursor: pointer;
+
   overflow: hidden;
+
   outline: none;
+
   -webkit-tap-highlight-color: transparent;
+
   transition:
     transform .22s ease,
     border-color .22s ease,
@@ -265,548 +54,161 @@ button {
     box-shadow .22s ease;
 }
 
+
+/* Selected */
 .method-card.active {
   border-color: rgba(247,196,92,.72);
+
   background:
     linear-gradient(
       145deg,
       rgba(247,196,92,.13),
       rgba(247,196,92,.035)
     );
+
   box-shadow:
-    0 8px 26px rgba(247,196,92,.12),
+    0 7px 22px rgba(247,196,92,.12),
     inset 0 1px 0 rgba(255,255,255,.05);
 }
 
+
+/* Selected gold line */
 .method-card.active::after {
   content: "";
+
   position: absolute;
-  left: 18px;
-  right: 18px;
+
+  left: 16px;
+  right: 16px;
   bottom: 0;
+
   height: 2px;
+
   border-radius: 2px;
+
   background: #f7c45c;
-  box-shadow: 0 0 10px rgba(247,196,92,.55);
+
+  box-shadow:
+    0 0 10px rgba(247,196,92,.55);
 }
 
-.method-card:active {
-  transform: scale(.94);
-}
 
-.method-card:focus,
-.method-card:focus-visible {
-  outline: none;
-}
+/* =========================
+   LOGO
+========================= */
 
+/* Logo container ကို ပိုကြီး */
 .method-logo {
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
+
   flex-shrink: 0;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   overflow: hidden;
-  border-radius: 10px;
+
+  border-radius: 9px;
+
   background: #fff;
 }
 
+
+/* Upload လုပ်ထားတဲ့ ပုံကို
+   အလယ်တည့်တည့် + ပိုကြီး */
 .method-logo img {
   display: block;
-  width: 42px;
-  height: 42px;
+
+  width: 46px;
+  height: 46px;
+
   object-fit: contain;
   object-position: center;
-  border-radius: 9px;
+
+  border-radius: 8px;
 }
 
+
+/* Payment name */
 .method-name {
   color: #e7e7e7;
-  font-size: 11px;
+
+  font-size: 10px;
+
   font-weight: 700;
-  line-height: 1.2;
+
+  line-height: 1.1;
+
   white-space: nowrap;
 }
 
+
+/* Selected name */
 .method-card.active .method-name {
   color: #f7c45c;
 }
 
-/* =========================
-   PAYMENT HEADER
-========================= */
-
-.payment-header {
-  padding: 4px 0 26px;
-  text-align: center;
-}
-
-.payment-badge {
-  display: inline-block;
-  margin-bottom: 13px;
-  color: #f7c45c;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.4px;
-}
-
-.payment-header h2 {
-  margin-bottom: 12px;
-  font-family: "Noto Serif Myanmar",serif;
-  font-size: clamp(28px,6vw,42px);
-  line-height: 1.35;
-  color: #fff;
-}
-
-.payment-header p {
-  max-width: 590px;
-  margin: 0 auto;
-  color: #9da4a1;
-  font-size: 14px;
-  line-height: 1.9;
-}
-
-/* =========================
-   TOTAL
-========================= */
-
-.total {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  margin-bottom: 18px;
-  padding: 18px 20px;
-  border: 1px solid rgba(247,196,92,.15);
-  border-radius: 18px;
-  background: rgba(247,196,92,.045);
-}
-
-.total-label {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-
-.total-icon {
-  color: #f7c45c;
-  font-size: 20px;
-}
-
-.total small {
-  display: block;
-  margin-bottom: 4px;
-  color: #8e9592;
-  font-size: 11px;
-}
-
-.total strong {
-  color: #f7c45c;
-  font-size: 20px;
-  font-weight: 800;
-}
-
-.verified-badge {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #f7c45c;
-  color: #111;
-  font-weight: 900;
-}
-
-/* =========================
-   PAYMENT BOX
-========================= */
-
-.paybox {
-  margin-bottom: 25px;
-  padding: 5px 20px 20px;
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 20px;
-  background: rgba(255,255,255,.018);
-  transition: opacity .25s ease,transform .25s ease;
-}
-
-.payment-row {
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  border-bottom: 1px solid rgba(255,255,255,.055);
-}
-
-.payment-row > span {
-  color: #8f9794;
-  font-size: 13px;
-}
-
-.payment-row b {
-  color: #f4f4f4;
-  font-size: 14px;
-  text-align: right;
-}
-
-.account-value {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.copy-btn {
-  padding: 7px 10px;
-  border: 1px solid rgba(247,196,92,.35);
-  border-radius: 9px;
-  background: rgba(247,196,92,.06);
-  color: #f7c45c;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.copy-btn:active {
-  transform: scale(.95);
-}
-
-/* =========================
-   QR
-========================= */
-
-.qrbox {
-  margin-top: 20px;
-  padding: 18px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 18px;
-  background: rgba(0,0,0,.16);
-}
-
-.qr-title {
-  margin-bottom: 13px;
-  color: #f7c45c;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.qr-image-wrap {
-  width: 190px;
-  height: 190px;
-  margin: 0 auto 13px;
-  padding: 8px;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 10px 35px rgba(0,0,0,.25);
-}
-
-.qr-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.qrbox small {
-  color: #9ca29f;
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.form-group {
-  margin-bottom: 18px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #d9dddb;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.form-group label span {
-  color: #f7c45c;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"] {
-  width: 100%;
-  height: 54px;
-  padding: 0 15px;
-  border: 1px solid rgba(255,255,255,.09);
-  border-radius: 13px;
-  outline: none;
-  background: #111414;
-  color: #fff;
-  font-size: 14px;
-  transition: border-color .2s ease,box-shadow .2s ease;
-}
-
-.form-group input:focus {
-  border-color: rgba(247,196,92,.55);
-  box-shadow: 0 0 0 3px rgba(247,196,92,.07);
-}
-
-.form-group input::placeholder {
-  color: #666d6a;
-}
-
-.upload-box {
-  position: relative;
-  min-height: 105px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  overflow: hidden;
-  border: 1px dashed rgba(247,196,92,.32);
-  border-radius: 16px;
-  background: rgba(247,196,92,.025);
-}
-
-.upload-icon {
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: rgba(247,196,92,.10);
-  color: #f7c45c;
-  font-size: 24px;
-}
-
-.upload-text strong,
-.upload-text small {
-  display: block;
-}
-
-.upload-text strong {
-  margin-bottom: 4px;
-  color: #e8e8e8;
-  font-size: 13px;
-}
-
-.upload-text small {
-  color: #777f7b;
-  font-size: 11px;
-}
-
-.upload-box input[type="file"] {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* =========================
-   MESSAGE
-========================= */
-
-.msg {
-  min-height: 20px;
-  margin-top: 18px;
-  color: #f7c45c;
-  font-size: 13px;
-  line-height: 1.7;
-  text-align: center;
-}
 
 /* =========================
    MOBILE
 ========================= */
 
-@media (max-width:600px) {
-
-  .wrap {
-    width: min(100% - 18px,760px);
-    padding-top: 10px;
-  }
-
-  .hero {
-    min-height: 470px;
-    padding: 38px 22px 34px;
-    border-radius: 22px;
-  }
-
-  .brand {
-    margin-bottom: 22px;
-    font-size: 11px;
-    letter-spacing: 1.8px;
-  }
-
-  .crown {
-    font-size: 20px;
-  }
-
-  .hero h1 {
-    font-size: clamp(34px,10vw,48px);
-    line-height: 1.4;
-    letter-spacing: -.8px;
-  }
-
-  .hero p {
-    font-size: 14px;
-    line-height: 1.9;
-  }
-
-  .cta {
-    width: 100%;
-    min-height: 56px;
-  }
-
-  .payment-section {
-    margin-top: 16px;
-    padding: 28px 17px 32px;
-    border-radius: 22px;
-  }
-
-  .method-picker {
-    margin-bottom: 22px;
-  }
-
-  .method-title {
-    font-size: 16px;
-    margin-bottom: 12px;
-  }
+@media (max-width: 600px) {
 
   .payment-methods {
-    gap: 8px;
+    gap: 7px;
   }
 
   .method-card {
-    width: 102px;
-    min-height: 82px;
-    padding: 8px;
-    border-radius: 15px;
-  }
+    width: 92px;
+    height: 82px;
 
-  .method-logo,
-  .method-logo img {
-    width: 38px;
-    height: 38px;
+    padding: 6px;
+
+    border-radius: 14px;
   }
 
   .method-logo {
+    width: 46px;
+    height: 46px;
+
     border-radius: 9px;
   }
 
   .method-logo img {
+    width: 46px;
+    height: 46px;
+
     border-radius: 8px;
   }
 
   .method-name {
     font-size: 10px;
   }
-
-  .payment-header h2 {
-    font-size: 29px;
-  }
-
-  .payment-header p {
-    font-size: 13px;
-  }
-
-  .total {
-    padding: 15px;
-  }
-
-  .total strong {
-    font-size: 17px;
-  }
-
-  .paybox {
-    padding: 3px 14px 16px;
-  }
-
-  .payment-row {
-    min-height: 58px;
-  }
-
-  .payment-row > span {
-    font-size: 12px;
-  }
-
-  .payment-row b {
-    font-size: 12px;
-  }
-
-  .account-value {
-    gap: 6px;
-  }
-
-  .copy-btn {
-    padding: 6px 8px;
-    font-size: 10px;
-  }
-
-  .qr-image-wrap {
-    width: 175px;
-    height: 175px;
-  }
 }
 
-@media (max-width:380px) {
 
-  .hero {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
+/* =========================
+   VERY SMALL PHONE
+========================= */
 
-  .payment-section {
-    padding-left: 13px;
-    padding-right: 13px;
-  }
+@media (max-width: 380px) {
 
   .method-card {
-    width: 96px;
-    min-height: 78px;
+    width: 88px;
+    height: 78px;
   }
 
-  .method-logo,
+  .method-logo {
+    width: 43px;
+    height: 43px;
+  }
+
   .method-logo img {
-    width: 36px;
-    height: 36px;
-  }
-
-  .payment-row {
-    gap: 8px;
-  }
-
-  .payment-row b {
-    max-width: 58%;
-    overflow-wrap: anywhere;
-  }
-
-  .qr-image-wrap {
-    width: 160px;
-    height: 160px;
-  }
-}
-
-@media (prefers-reduced-motion:reduce) {
-
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.01ms !important;
+    width: 43px;
+    height: 43px;
   }
 }
