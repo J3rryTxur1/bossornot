@@ -1,5 +1,5 @@
 const cfg = {
-  url: "https://kmtuecypckhhdsonuvnu.supabase.co",
+  url: "https://kmtuecypkchhdsonuvnu.supabase.co",
   key: "sb_publishable_l-Ek3faVssYGENChtAKoPw_ZJyDi7uK"
 };
 
