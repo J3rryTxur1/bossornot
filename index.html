@@ -17,35 +17,51 @@
 
   <title>Wealth Showcase</title>
 
-  <!-- Premium Myanmar Fonts -->
+
+  <!-- =========================================
+       PREMIUM MYANMAR FONTS
+  ========================================== -->
+
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Noto+Serif+Myanmar:wght@600;700;800&display=swap"
     rel="stylesheet"
   >
 
+
   <!-- Main CSS -->
-  <link rel="stylesheet" href="/style.css">
+
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  >
 
 </head>
 
 
 <body>
 
+
 <main class="wrap">
 
-  <!-- =========================
+
+  <!-- =========================================
        HERO
-  ========================== -->
+  ========================================== -->
 
   <section class="hero card">
 
+
     <div class="brand">
 
-      <span class="crown">♛</span>
+      <span class="crown">
+        ♛
+      </span>
 
       WEALTH
 
-      <span>SHOWCASE</span>
+      <span>
+        SHOWCASE
+      </span>
 
     </div>
 
@@ -54,7 +70,9 @@
 
       သင်ချမ်းသာကြောင်း<br>
 
-      <b>ပြသလိုက်ပါ</b>
+      <b>
+        ပြသလိုက်ပါ
+      </b>
 
     </h1>
 
@@ -69,6 +87,8 @@
 
     </p>
 
+
+    <!-- MAIN PAYMENT BUTTON -->
 
     <button
       type="button"
@@ -86,22 +106,116 @@
 
     </button>
 
+
   </section>
 
 
-  <!-- =========================
-       PAYMENT
-  ========================== -->
+
+  <!-- =========================================
+       PAYMENT SECTION
+  ========================================== -->
 
   <section
     id="pay"
     class="card payment-section"
   >
 
-    <div class="payment-header">
 
-      <div class="payment-badge">
-        SECURE PAYMENT
+    <!-- =======================================
+         PAYMENT METHOD SELECTOR
+    ======================================== -->
+
+    <div class="method-picker">
+
+
+      <div class="method-title">
+        ငွေပေးချေရန် ရွေးပါ
+      </div>
+
+
+      <div class="payment-methods">
+
+
+        <!-- ===================================
+             KBZ PAY
+        ==================================== -->
+
+        <button
+          type="button"
+          class="method-card active"
+          data-method="kbz"
+        >
+
+
+          <div class="method-logo">
+
+            <img
+              src="/kbzpay-logo.png"
+              alt="KBZPay"
+            >
+
+          </div>
+
+
+          <div class="method-name">
+            KBZPay
+          </div>
+
+
+        </button>
+
+
+
+        <!-- ===================================
+             WAVE MONEY
+        ==================================== -->
+
+        <button
+          type="button"
+          class="method-card"
+          data-method="wave"
+        >
+
+
+          <div class="method-logo">
+
+            <img
+              src="/wavepay-logo.png"
+              alt="Wave Money"
+            >
+
+          </div>
+
+
+          <div class="method-name">
+            Wave Money
+          </div>
+
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         PAYMENT HEADER
+    ========================================== -->
+
+    <div
+      class="payment-header"
+      id="paymentHeader"
+    >
+
+
+      <div
+        class="payment-badge"
+        id="paymentBadge"
+      >
+        SECURE PAYMENT · KBZPAY
       </div>
 
 
@@ -110,37 +224,48 @@
       </h2>
 
 
-      <p>
-        အောက်ပါအချက်အလက်များအတိုင်း
+      <p id="paymentDescription">
+
+        အောက်ပါ KBZPay အချက်အလက်များအတိုင်း
         ငွေပေးချေပြီး Transfer Screenshot တင်ပါ။
+
       </p>
+
 
     </div>
 
 
-    <!-- =========================
+
+    <!-- =========================================
          TOTAL
-    ========================== -->
+    ========================================== -->
 
     <div class="total">
 
+
       <div class="total-label">
+
 
         <span class="total-icon">
           ◆
         </span>
 
+
         <div>
+
 
           <small>
             Total to pay
           </small>
 
+
           <strong>
             50,000 MMK
           </strong>
 
+
         </div>
+
 
       </div>
 
@@ -149,44 +274,54 @@
         ✓
       </div>
 
+
     </div>
 
 
-    <!-- =========================
+
+    <!-- =========================================
          PAYMENT INFORMATION
-    ========================== -->
+    ========================================== -->
 
     <div class="paybox">
 
 
-      <!-- Payment Method -->
+      <!-- PAYMENT METHOD -->
 
       <div class="payment-row">
+
 
         <span>
           Payment
         </span>
 
-        <b>
+
+        <b id="paymentMethod">
           KBZPay
         </b>
+
 
       </div>
 
 
-      <!-- Account Number -->
+
+      <!-- ACCOUNT NUMBER -->
 
       <div class="payment-row account-row">
+
 
         <span>
           Account Number
         </span>
 
+
         <div class="account-value">
+
 
           <b id="acct">
             09693940585
           </b>
+
 
           <button
             type="button"
@@ -196,60 +331,80 @@
             Copy
           </button>
 
+
         </div>
+
 
       </div>
 
 
-      <!-- Account Name -->
+
+      <!-- ACCOUNT NAME -->
 
       <div class="payment-row">
+
 
         <span>
           Account Name
         </span>
 
-        <b>
+
+        <b id="accountName">
           U SAI HTET MYAT THAW
         </b>
+
 
       </div>
 
 
-      <!-- =========================
+
+      <!-- =======================================
            QR CODE
-      ========================== -->
+      ======================================== -->
 
       <div class="qrbox">
 
-        <div class="qr-title">
+
+        <div
+          class="qr-title"
+          id="qrTitle"
+        >
           KBZPay QR
         </div>
 
 
         <div class="qr-image-wrap">
 
+
           <img
+            id="qrImage"
             src="/kbzpay-qr.jpg"
             alt="KBZPay QR Code"
             class="qr-image"
           >
 
+
         </div>
 
 
-        <small>
-          KBZPay ဖြင့် Scan ပြီး 50,000 MMK ပေးချေပါ
+        <small id="qrNote">
+
+          KBZPay ဖြင့် Scan ပြီး
+          50,000 MMK ပေးချေပါ
+
         </small>
 
+
       </div>
+
 
     </div>
 
 
-    <!-- =========================
+
+    <!-- =========================================
          FORM
-    ========================== -->
+    ========================================== -->
 
     <form
       id="payform"
@@ -257,12 +412,16 @@
     >
 
 
-      <!-- Full Name -->
+      <!-- FULL NAME -->
 
       <div class="form-group">
 
+
         <label for="name">
-          Full Name <span>*</span>
+
+          Full Name
+          <span>*</span>
+
         </label>
 
 
@@ -275,15 +434,21 @@
           placeholder="Certificate မှာထည့်မယ့် အမည်"
         >
 
+
       </div>
 
 
-      <!-- Email -->
+
+      <!-- EMAIL -->
 
       <div class="form-group">
 
+
         <label for="email">
-          Email Address <span>*</span>
+
+          Email Address
+          <span>*</span>
+
         </label>
 
 
@@ -296,19 +461,26 @@
           placeholder="Certificate ပို့မယ့် Email"
         >
 
+
       </div>
 
 
-      <!-- Transfer Slip -->
+
+      <!-- TRANSFER SCREENSHOT -->
 
       <div class="form-group">
 
+
         <label for="slip">
-          Transfer Screenshot <span>*</span>
+
+          Transfer Screenshot
+          <span>*</span>
+
         </label>
 
 
         <div class="upload-box">
+
 
           <div class="upload-icon">
             ↑
@@ -317,13 +489,16 @@
 
           <div class="upload-text">
 
+
             <strong>
               Transfer Slip ရွေးပါ
             </strong>
 
+
             <small>
               JPG, PNG, WEBP · 5MB အောက်
             </small>
+
 
           </div>
 
@@ -336,32 +511,40 @@
             required
           >
 
+
         </div>
+
 
       </div>
 
 
-      <!-- Submit -->
+
+      <!-- SUBMIT BUTTON -->
 
       <button
         type="submit"
         class="cta wide"
       >
 
+
         <span class="btn-text">
           Payment တင်မည်
         </span>
+
 
         <span class="btn-arrow">
           →
         </span>
 
+
       </button>
+
 
     </form>
 
 
-    <!-- Message -->
+
+    <!-- MESSAGE -->
 
     <p
       id="msg"
@@ -369,19 +552,32 @@
       aria-live="polite"
     ></p>
 
+
   </section>
+
 
 </main>
 
 
-<!-- App JS -->
+
+<!-- =========================================
+     APP JS
+========================================== -->
 
 <script src="/app.js"></script>
 
 
-<!-- Payment Reveal -->
+
+<!-- =========================================
+     PAYMENT METHOD + REVEAL JS
+========================================== -->
 
 <script>
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
 
 const payBtn =
   document.getElementById("payBtn");
@@ -389,42 +585,314 @@ const payBtn =
 const paymentSection =
   document.getElementById("pay");
 
+const methodCards =
+  document.querySelectorAll(".method-card");
+
+
+/* =========================================
+   PAYMENT DATA
+========================================= */
+
+const paymentData = {
+
+
+  kbz: {
+
+    method: "KBZPay",
+
+    account: "09693940585",
+
+    name: "U SAI HTET MYAT THAW",
+
+    qr: "/kbzpay-qr.jpg",
+
+    qrTitle: "KBZPay QR",
+
+    note:
+      "KBZPay ဖြင့် Scan ပြီး 50,000 MMK ပေးချေပါ"
+
+  },
+
+
+  wave: {
+
+    method: "Wave Money",
+
+    account: "09699197474",
+
+    name: "Thaung Phyo Hlaing",
+
+    qr: "/wavepay-qr.jpg",
+
+    qrTitle: "Wave Money QR",
+
+    note:
+      "Wave Money ဖြင့် Scan ပြီး 50,000 MMK ပေးချေပါ"
+
+  }
+
+
+};
+
+
+
+/* =========================================
+   SELECTED PAYMENT
+========================================= */
+
+window.selectedPaymentMethod =
+  "KBZPay";
+
+
+
+/* =========================================
+   UPDATE PAYMENT INFORMATION
+========================================= */
+
+function updatePayment(method) {
+
+
+  const data =
+    paymentData[method];
+
+
+  if (!data) {
+    return;
+  }
+
+
+  /* Save selected payment method */
+
+  window.selectedPaymentMethod =
+    data.method;
+
+
+
+  /* Payment Method */
+
+  document
+    .getElementById("paymentMethod")
+    .textContent =
+    data.method;
+
+
+
+  /* Account Number */
+
+  document
+    .getElementById("acct")
+    .textContent =
+    data.account;
+
+
+
+  /* Account Name */
+
+  document
+    .getElementById("accountName")
+    .textContent =
+    data.name;
+
+
+
+  /* QR Title */
+
+  document
+    .getElementById("qrTitle")
+    .textContent =
+    data.qrTitle;
+
+
+
+  /* QR Image */
+
+  const qrImage =
+    document.getElementById("qrImage");
+
+
+  qrImage.src =
+    data.qr;
+
+
+  qrImage.alt =
+    data.qrTitle;
+
+
+
+  /* QR Description */
+
+  document
+    .getElementById("qrNote")
+    .textContent =
+    data.note;
+
+
+
+  /* Header Badge */
+
+  document
+    .getElementById("paymentBadge")
+    .textContent =
+    "SECURE PAYMENT · " +
+    data.method.toUpperCase();
+
+
+
+  /* Header Description */
+
+  document
+    .getElementById("paymentDescription")
+    .textContent =
+    "အောက်ပါ " +
+    data.method +
+    " အချက်အလက်များအတိုင်း ငွေပေးချေပြီး Transfer Screenshot တင်ပါ။";
+
+
+
+  /* Refresh payment box animation */
+
+  const paybox =
+    document.querySelector(".paybox");
+
+
+  paybox.style.animation =
+    "none";
+
+
+  void paybox.offsetWidth;
+
+
+  paybox.style.animation =
+    "contentUp .45s cubic-bezier(.2,.8,.2,1)";
+
+
+}
+
+
+
+/* =========================================
+   MAIN PAYMENT BUTTON
+========================================= */
 
 payBtn.addEventListener("click", () => {
 
-  /* Remove browser tap/focus effect */
+
+  /* Remove focus */
 
   payBtn.blur();
 
 
-  /* Restart button animation */
+  /* Restart click animation */
 
-  payBtn.classList.remove("clicked");
+  payBtn.classList.remove(
+    "clicked"
+  );
+
 
   void payBtn.offsetWidth;
 
-  payBtn.classList.add("clicked");
+
+  payBtn.classList.add(
+    "clicked"
+  );
 
 
-  /* Show payment section */
+
+  /* Reveal payment section */
 
   setTimeout(() => {
 
-    paymentSection.classList.add("show");
 
+    paymentSection.classList.add(
+      "show"
+    );
+
+
+
+    /* Scroll to payment */
 
     setTimeout(() => {
 
+
       paymentSection.scrollIntoView({
+
         behavior: "smooth",
+
         block: "start"
+
       });
+
 
     }, 150);
 
+
   }, 420);
 
+
 });
+
+
+
+/* =========================================
+   PAYMENT METHOD SELECT
+========================================= */
+
+methodCards.forEach((card) => {
+
+
+  card.addEventListener(
+    "click",
+    () => {
+
+
+      /* Remove active */
+
+      methodCards.forEach((item) => {
+
+        item.classList.remove(
+          "active"
+        );
+
+      });
+
+
+
+      /* Add active */
+
+      card.classList.add(
+        "active"
+      );
+
+
+
+      /* Get method */
+
+      const method =
+        card.dataset.method;
+
+
+
+      /* Update */
+
+      updatePayment(
+        method
+      );
+
+
+    }
+  );
+
+
+});
+
+
+
+/* =========================================
+   DEFAULT PAYMENT
+========================================= */
+
+updatePayment("kbz");
+
 
 </script>
 
