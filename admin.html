@@ -313,9 +313,11 @@ async function loadPayments() {
   } catch (error) {
 
     box.innerHTML =
-      "<b>❌ Connection error</b><br>" +
-      escapeHtml(error.message);
-
+  "<b>❌ Error</b><br>" +
+  escapeHtml(data.message || "Failed") +
+  "<br><br><small>" +
+  escapeHtml(data.details || "No details") +
+  "</small>";
   }
 }
 
