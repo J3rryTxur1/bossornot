@@ -181,12 +181,11 @@ export async function onRequestGet(ctx) {
       `&order=created_at.desc`;
 
     const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        apikey: ctx.env.SUPABASE_SECRET_KEY,
-        Authorization: `Bearer ${ctx.env.SUPABASE_SECRET_KEY}`
-      }
-    });
+  method: "GET",
+  headers: {
+    apikey: ctx.env.SUPABASE_SECRET_KEY
+  }
+});
 
     const text = await response.text();
 
