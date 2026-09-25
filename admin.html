@@ -250,11 +250,14 @@ async function loadPayments() {
     }
 
     if (!response.ok || !data.ok) {
-      box.innerHTML =
-        "<b>❌ Error</b><br>" +
-        (data.message || "Failed");
-      return;
-    }
+  box.innerHTML =
+    "<b>❌ Error</b><br>" +
+    escapeHtml(data.message || "Failed") +
+    "<br><br><small>" +
+    escapeHtml(data.details || "No details") +
+    "</small>";
+  return;
+}
 
     if (!data.payments.length) {
       box.innerHTML =
