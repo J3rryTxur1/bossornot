@@ -2,138 +2,415 @@
 <html lang="my">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080909"
+  >
+
   <title>Wealth Showcase</title>
-  <link rel="stylesheet" href="/style.css">
+
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  >
 </head>
 
 <body>
 
 <main class="wrap">
 
-  <!-- HERO -->
+  <!-- =================================
+       HERO SECTION
+  ================================== -->
+
   <section class="hero card">
 
     <div class="brand">
-      ♛ WEALTH <span>SHOWCASE</span>
+      <span class="crown">♛</span>
+      WEALTH
+      <span>SHOWCASE</span>
     </div>
+
 
     <h1>
       သင်ချမ်းသာကြောင်း<br>
       <b>ပြသလိုက်ပါ</b>
     </h1>
 
+
     <p>
       50,000 MMK ပေးချေပြီး Transfer Slip တင်ပါ။<br>
-      ငွေဝင်ရောက်မှုကို ကိုယ်တိုင်စစ်ဆေးပြီးမှ Certificate ထုတ်ပေးပါမယ်။
+      ငွေဝင်ရောက်မှုကို ကိုယ်တိုင်စစ်ဆေးပြီးမှ<br>
+      Certificate ထုတ်ပေးပါမယ်။
     </p>
+
+
+    <!-- PREMIUM PAYMENT BUTTON -->
 
     <button
       type="button"
       class="cta"
-      id="payBtn">
-      50,000 MMK ပေးချေရန် →
+      id="payBtn"
+    >
+      <span class="btn-text">
+        50,000 MMK ပေးချေရန်
+      </span>
+
+      <span class="btn-arrow">
+        →
+      </span>
     </button>
 
   </section>
 
 
-  <!-- PAYMENT SECTION -->
+
+  <!-- =================================
+       PAYMENT SECTION
+       Hidden until button is clicked
+  ================================== -->
+
   <section
     id="pay"
-    class="card payment-section">
+    class="card payment-section"
+  >
 
-    <h2>Complete your payment</h2>
+    <div class="payment-header">
+
+      <div class="payment-badge">
+        SECURE PAYMENT
+      </div>
+
+      <h2>
+        Complete your payment
+      </h2>
+
+      <p>
+        အောက်ပါအချက်အလက်များအတိုင်း
+        ငွေပေးချေပြီး Transfer Screenshot တင်ပါ။
+      </p>
+
+    </div>
+
+
+    <!-- =================================
+         TOTAL AMOUNT
+    ================================== -->
 
     <div class="total">
-      <small>Total to pay</small>
-      <strong>50,000 MMK</strong>
+
+      <div class="total-label">
+        <span class="total-icon">◆</span>
+
+        <div>
+          <small>
+            Total to pay
+          </small>
+
+          <strong>
+            50,000 MMK
+          </strong>
+        </div>
+      </div>
+
+      <div class="verified-badge">
+        ✓
+      </div>
+
     </div>
+
+
+
+    <!-- =================================
+         PAYMENT INFORMATION
+    ================================== -->
 
     <div class="paybox">
 
-      <div>
-        <span>Payment</span>
-        <b>KPay</b>
+
+      <!-- Payment Method -->
+
+      <div class="payment-row">
+
+        <span>
+          Payment
+        </span>
+
+        <b>
+          KPay
+        </b>
+
       </div>
 
-      <div>
-        <span>Account number</span>
-        <b id="acct">09XXXXXXXXX</b>
-        <button
-          type="button"
-          onclick="copyText('acct')">
-          Copy
-        </button>
+
+      <!-- Account Number -->
+
+      <div class="payment-row account-row">
+
+        <span>
+          Account number
+        </span>
+
+        <div class="account-value">
+
+          <b id="acct">
+            09XXXXXXXXX
+          </b>
+
+          <button
+            type="button"
+            onclick="copyText('acct')"
+          >
+            Copy
+          </button>
+
+        </div>
+
       </div>
 
-      <div>
-        <span>Account name</span>
-        <b>ACCOUNT NAME</b>
+
+      <!-- Account Name -->
+
+      <div class="payment-row">
+
+        <span>
+          Account name
+        </span>
+
+        <b>
+          ACCOUNT NAME
+        </b>
+
       </div>
+
+
+
+      <!-- =================================
+           QR CODE AREA
+      ================================== -->
 
       <div class="qrbox">
-        KPay QR<br>
-        <small>QR ပုံကို နောက်မှ ထည့်နိုင်ပါတယ်</small>
+
+        <div class="qr-title">
+          KPay QR
+        </div>
+
+        <div class="qr-placeholder">
+
+          <span>
+            QR
+          </span>
+
+        </div>
+
+        <small>
+          KPay ဖြင့် Scan ပြီး 50,000 MMK ပေးချေပါ
+        </small>
+
       </div>
 
     </div>
 
 
-    <form id="payform">
 
-      <label>Full Name *</label>
-      <input
-        id="name"
-        required
-        placeholder="Certificate မှာထည့်မယ့် အမည်">
+    <!-- =================================
+         PAYMENT FORM
+    ================================== -->
 
-      <label>Email Address *</label>
-      <input
-        id="email"
-        type="email"
-        required
-        placeholder="Certificate ပို့မယ့် Email">
+    <form
+      id="payform"
+      autocomplete="on"
+    >
 
-      <label>Transfer Screenshot *</label>
-      <input
-        id="slip"
-        type="file"
-        accept="image/png,image/jpeg,image/webp"
-        required>
+
+      <!-- Full Name -->
+
+      <div class="form-group">
+
+        <label for="name">
+          Full Name
+          <span>*</span>
+        </label>
+
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+          placeholder="Certificate မှာထည့်မယ့် အမည်"
+        >
+
+      </div>
+
+
+
+      <!-- Email -->
+
+      <div class="form-group">
+
+        <label for="email">
+          Email Address
+          <span>*</span>
+        </label>
+
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          placeholder="Certificate ပို့မယ့် Email"
+        >
+
+      </div>
+
+
+
+      <!-- Transfer Screenshot -->
+
+      <div class="form-group">
+
+        <label for="slip">
+          Transfer Screenshot
+          <span>*</span>
+        </label>
+
+        <div class="upload-box">
+
+          <div class="upload-icon">
+            ↑
+          </div>
+
+          <div class="upload-text">
+
+            <strong>
+              Transfer Slip ရွေးပါ
+            </strong>
+
+            <small>
+              JPG, PNG, WEBP · 5MB အောက်
+            </small>
+
+          </div>
+
+          <input
+            id="slip"
+            name="slip"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Submit -->
 
       <button
         type="submit"
-        class="cta wide">
-        Submit payment
+        class="cta wide"
+      >
+
+        <span class="btn-text">
+          Payment တင်မည်
+        </span>
+
+        <span class="btn-arrow">
+          →
+        </span>
+
       </button>
+
 
     </form>
 
-    <p id="msg" class="msg"></p>
+
+
+    <!-- =================================
+         RESULT MESSAGE
+    ================================== -->
+
+    <p
+      id="msg"
+      class="msg"
+      aria-live="polite"
+    ></p>
+
 
   </section>
 
 </main>
 
+
+
+<!-- =================================
+     EXISTING APP JS
+================================== -->
+
 <script src="/app.js"></script>
 
+
+
+<!-- =================================
+     PREMIUM PAYMENT REVEAL
+================================== -->
+
 <script>
+
   const payBtn = document.getElementById("payBtn");
   const paymentSection = document.getElementById("pay");
 
   payBtn.addEventListener("click", () => {
 
-    paymentSection.classList.add("show");
+    /* -----------------------------
+       Button click animation
+    ------------------------------ */
+
+    payBtn.classList.remove("clicked");
+
+    /* Restart CSS animation */
+
+    void payBtn.offsetWidth;
+
+    payBtn.classList.add("clicked");
+
+
+    /* -----------------------------
+       Reveal payment section
+    ------------------------------ */
 
     setTimeout(() => {
-      paymentSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }, 100);
+
+      paymentSection.classList.add("show");
+
+
+      /* -----------------------------
+         Smooth scroll
+      ------------------------------ */
+
+      setTimeout(() => {
+
+        paymentSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }, 150);
+
+    }, 420);
 
   });
+
 </script>
 
 </body>
