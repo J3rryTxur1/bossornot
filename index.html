@@ -1,20 +1,140 @@
 <!doctype html>
-<html lang="my"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wealth Showcase</title><link rel="stylesheet" href="/style.css"></head>
-<body><main class="wrap">
-<section class="hero card"><div class="brand">♛ WEALTH <span>SHOWCASE</span></div>
-<h1>သင်ချမ်းသာကြောင်း<br><b>ပြသလိုက်ပါ</b></h1>
-<p>50,000 MMK ပေးချေပြီး Transfer Slip တင်ပါ။ ငွေဝင်ရောက်မှုကို ကိုယ်တိုင်စစ်ဆေးပြီးမှ Certificate ထုတ်ပေးပါမယ်။</p>
-<a class="cta" href="#pay">50,000 MMK ပေးချေရန် →</a></section>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wealth Showcase</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
 
-<section id="pay" class="card"><h2>Complete your payment</h2>
-<div class="total"><small>Total to pay</small><strong>50,000 MMK</strong></div>
-<div class="paybox"><div><span>Payment</span><b>KPay</b></div><div><span>Account number</span><b id="acct">09XXXXXXXXX</b><button onclick="copyText('acct')">Copy</button></div><div><span>Account name</span><b>ACCOUNT NAME</b></div>
-<div class="qrbox">KPay QR<br><small>QR ပုံကို နောက်မှ ထည့်နိုင်ပါတယ်</small></div></div>
+<body>
 
-<form id="payform"><label>Full Name *</label><input id="name" required placeholder="Certificate မှာထည့်မယ့် အမည်">
-<label>Email Address *</label><input id="email" type="email" required placeholder="Certificate ပို့မယ့် Email">
-<label>Transfer Screenshot *</label><input id="slip" type="file" accept="image/png,image/jpeg,image/webp" required>
-<button class="cta wide">Submit payment</button></form>
-<p id="msg" class="msg"></p></section>
-</main><script src="/app.js"></script></body></html>
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero card">
+
+    <div class="brand">
+      ♛ WEALTH <span>SHOWCASE</span>
+    </div>
+
+    <h1>
+      သင်ချမ်းသာကြောင်း<br>
+      <b>ပြသလိုက်ပါ</b>
+    </h1>
+
+    <p>
+      50,000 MMK ပေးချေပြီး Transfer Slip တင်ပါ။<br>
+      ငွေဝင်ရောက်မှုကို ကိုယ်တိုင်စစ်ဆေးပြီးမှ Certificate ထုတ်ပေးပါမယ်။
+    </p>
+
+    <button
+      type="button"
+      class="cta"
+      id="payBtn">
+      50,000 MMK ပေးချေရန် →
+    </button>
+
+  </section>
+
+
+  <!-- PAYMENT SECTION -->
+  <section
+    id="pay"
+    class="card payment-section">
+
+    <h2>Complete your payment</h2>
+
+    <div class="total">
+      <small>Total to pay</small>
+      <strong>50,000 MMK</strong>
+    </div>
+
+    <div class="paybox">
+
+      <div>
+        <span>Payment</span>
+        <b>KPay</b>
+      </div>
+
+      <div>
+        <span>Account number</span>
+        <b id="acct">09XXXXXXXXX</b>
+        <button
+          type="button"
+          onclick="copyText('acct')">
+          Copy
+        </button>
+      </div>
+
+      <div>
+        <span>Account name</span>
+        <b>ACCOUNT NAME</b>
+      </div>
+
+      <div class="qrbox">
+        KPay QR<br>
+        <small>QR ပုံကို နောက်မှ ထည့်နိုင်ပါတယ်</small>
+      </div>
+
+    </div>
+
+
+    <form id="payform">
+
+      <label>Full Name *</label>
+      <input
+        id="name"
+        required
+        placeholder="Certificate မှာထည့်မယ့် အမည်">
+
+      <label>Email Address *</label>
+      <input
+        id="email"
+        type="email"
+        required
+        placeholder="Certificate ပို့မယ့် Email">
+
+      <label>Transfer Screenshot *</label>
+      <input
+        id="slip"
+        type="file"
+        accept="image/png,image/jpeg,image/webp"
+        required>
+
+      <button
+        type="submit"
+        class="cta wide">
+        Submit payment
+      </button>
+
+    </form>
+
+    <p id="msg" class="msg"></p>
+
+  </section>
+
+</main>
+
+<script src="/app.js"></script>
+
+<script>
+  const payBtn = document.getElementById("payBtn");
+  const paymentSection = document.getElementById("pay");
+
+  payBtn.addEventListener("click", () => {
+
+    paymentSection.classList.add("show");
+
+    setTimeout(() => {
+      paymentSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 100);
+
+  });
+</script>
+
+</body>
+</html>
