@@ -1,182 +1,186 @@
+/* =========================================================
+   BOSSORNOT PAYMENT APP
+========================================================= */
+
 const cfg = {
   url: "https://kmtuecypkchhdsonuvnu.supabase.co",
   key: "sb_publishable_l-Ek3faVssYGENChtAKoPw_ZJyDi7uK"
 };
 
 
-/* =========================================
-   COPY ACCOUNT NUMBER
-========================================= */
+/* =========================================================
+   START
+========================================================= */
 
-function copyText(id) {
+document.addEventListener("DOMContentLoaded", () => {
 
-  const el = document.getElementById(id);
+  const form = document.getElementById("payform");
+  const msg = document.getElementById("msg");
+  const slipInput = document.getElementById("slip");
+  const uploadBox = document.querySelector(".upload-box");
+  const uploadText = document.querySelector(".upload-text strong");
 
-  if (!el) {
+  console.log("BossOrNot app.js loaded");
+
+
+  /* =======================================================
+     BASIC CHECK
+  ======================================================= */
+
+  if (!form) {
+    console.error("Payment form not found: #payform");
+
+    if (msg) {
+      msg.innerHTML =
+        "<b>❌ Payment form မတွေ့ပါ</b>";
+    }
+
     return;
   }
 
-  const text = el.textContent.trim();
 
-  if (navigator.clipboard) {
+  /* =======================================================
+     COPY FUNCTION
+  ======================================================= */
 
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        console.log("Copied:", text);
-      })
-      .catch((err) => {
-        console.error("Copy failed:", err);
-      });
+  window.copyText = function (id) {
+
+    const el = document.getElementById(id);
+
+    if (!el) {
+      return;
+    }
+
+    const text = el.textContent.trim();
+
+    if (
+      navigator.clipboard &&
+      window.isSecureContext
+    ) {
+
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          console.log("Copied:", text);
+        })
+        .catch(() => {
+          fallbackCopy(text);
+        });
+
+    } else {
+
+      fallbackCopy(text);
+
+    }
+
+  };
+
+
+  function fallbackCopy(text) {
+
+    const textarea =
+      document.createElement("textarea");
+
+    textarea.value = text;
+
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+
+    try {
+      document.execCommand("copy");
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+
+    textarea.remove();
 
   }
 
-}
 
+  /* =======================================================
+     FILE PICKER
+  ======================================================= */
 
-/* =========================================
-   FORM ELEMENTS
-========================================= */
+  if (uploadBox && slipInput) {
 
-const form =
-  document.getElementById("payform");
+    uploadBox.addEventListener(
+      "click",
+      (e) => {
 
-const msg =
-  document.getElementById("msg");
+        /*
+         * File input ကိုယ်တိုင်နှိပ်တာဆိုရင်
+         * double trigger မဖြစ်အောင်ထားမယ်
+         */
 
+        if (e.target === slipInput) {
+          return;
+        }
 
-/* =========================================
-   FORM CHECK
-========================================= */
-
-if (!form) {
-
-  console.error(
-    "Payment form #payform not found."
-  );
-
-} else {
-
-
-  /* =======================================
-     SUBMIT FORM
-  ======================================= */
-
-  form.addEventListener(
-    "submit",
-    async (e) => {
-
-      e.preventDefault();
-
-
-      /* =====================================
-         INITIAL MESSAGE
-      ===================================== */
-
-      if (msg) {
-
-        msg.textContent =
-          "Submitting...";
+        slipInput.click();
 
       }
+    );
+
+  }
 
 
-      try {
+  /* =======================================================
+     FILE SELECTED
+  ======================================================= */
 
+  if (slipInput) {
 
-        /* ===================================
-           GET NAME
-        =================================== */
-
-        const nameEl =
-          document.getElementById("name");
-
-        const name =
-          nameEl
-            ? nameEl.value.trim()
-            : "";
-
-
-        /* ===================================
-           GET EMAIL
-        =================================== */
-
-        const emailEl =
-          document.getElementById("email");
-
-        const email =
-          emailEl
-            ? emailEl.value.trim()
-            : "";
-
-
-        /* ===================================
-           GET SLIP
-        =================================== */
-
-        const fileInput =
-          document.getElementById("slip");
+    slipInput.addEventListener(
+      "change",
+      () => {
 
         const file =
-          fileInput &&
-          fileInput.files
-            ? fileInput.files[0]
-            : null;
-
-
-        /* ===================================
-           VALIDATION
-        =================================== */
-
-        if (!name) {
-
-          msg.textContent =
-            "Name ထည့်ပါ";
-
-          return;
-
-        }
-
-
-        if (!email) {
-
-          msg.textContent =
-            "Email ထည့်ပါ";
-
-          return;
-
-        }
-
+          slipInput.files &&
+          slipInput.files[0];
 
         if (!file) {
 
-          msg.textContent =
-            "Slip ရွေးပါ";
+          if (uploadText) {
+            uploadText.textContent =
+              "Transfer Slip ရွေးပါ";
+          }
 
           return;
-
         }
 
 
-        /* ===================================
-           FILE SIZE
-        =================================== */
+        /* FILE SIZE */
 
         if (
           file.size >
           5 * 1024 * 1024
         ) {
 
-          msg.textContent =
-            "Slip file size 5MB အောက် ဖြစ်ရပါမယ်";
+          if (msg) {
+
+            msg.innerHTML = `
+              <b>❌ File အရမ်းကြီးပါတယ်</b><br>
+              5MB အောက် file ပဲ တင်နိုင်ပါတယ်။
+            `;
+
+          }
+
+          slipInput.value = "";
+
+          if (uploadText) {
+            uploadText.textContent =
+              "Transfer Slip ရွေးပါ";
+          }
 
           return;
-
         }
 
 
-        /* ===================================
-           FILE TYPE
-        =================================== */
+        /* FILE TYPE */
 
         const allowedTypes = [
           "image/jpeg",
@@ -191,44 +195,227 @@ if (!form) {
           !allowedTypes.includes(file.type)
         ) {
 
-          msg.textContent =
-            "JPG, PNG, WEBP ပုံများသာ တင်နိုင်ပါတယ်";
+          if (msg) {
+
+            msg.innerHTML = `
+              <b>❌ File type မမှန်ပါ</b><br>
+              JPG, PNG, WEBP ပဲ တင်နိုင်ပါတယ်။
+            `;
+
+          }
+
+          slipInput.value = "";
+
+          if (uploadText) {
+            uploadText.textContent =
+              "Transfer Slip ရွေးပါ";
+          }
 
           return;
+        }
+
+
+        /* SHOW FILE NAME */
+
+        if (uploadText) {
+
+          uploadText.textContent =
+            file.name;
 
         }
 
 
-        /* ===================================
+        if (msg) {
+
+          msg.innerHTML = `
+            <span style="color:#f7c45c;">
+              ✓ Slip ရွေးပြီးပါပြီ
+            </span>
+          `;
+
+        }
+
+        console.log(
+          "Selected file:",
+          file.name,
+          file.size,
+          file.type
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     PAYMENT FORM
+  ======================================================= */
+
+  form.addEventListener(
+    "submit",
+    async (e) => {
+
+      e.preventDefault();
+
+
+      /* ================================================
+         RESET MESSAGE
+      ================================================= */
+
+      if (msg) {
+
+        msg.innerHTML = `
+          <span style="color:#f7c45c;">
+            Processing...
+          </span>
+        `;
+
+      }
+
+
+      try {
+
+
+        /* ================================================
+           GET NAME
+        ================================================= */
+
+        const nameElement =
+          document.getElementById("name");
+
+        const name =
+          nameElement
+            ? nameElement.value.trim()
+            : "";
+
+
+        /* ================================================
+           GET EMAIL
+        ================================================= */
+
+        const emailElement =
+          document.getElementById("email");
+
+        const email =
+          emailElement
+            ? emailElement.value.trim()
+            : "";
+
+
+        /* ================================================
+           GET FILE
+        ================================================= */
+
+        const file =
+          slipInput &&
+          slipInput.files &&
+          slipInput.files[0]
+            ? slipInput.files[0]
+            : null;
+
+
+        /* ================================================
+           VALIDATION
+        ================================================= */
+
+        if (!name) {
+
+          showError(
+            "Name ထည့်ပါ"
+          );
+
+          return;
+        }
+
+
+        if (!email) {
+
+          showError(
+            "Email Address ထည့်ပါ"
+          );
+
+          return;
+        }
+
+
+        if (!file) {
+
+          showError(
+            "Transfer Slip ရွေးပါ"
+          );
+
+          return;
+        }
+
+
+        /* ================================================
+           EMAIL FORMAT
+        ================================================= */
+
+        const emailRegex =
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (!emailRegex.test(email)) {
+
+          showError(
+            "Email Address မှန်ကန်စွာ ထည့်ပါ"
+          );
+
+          return;
+        }
+
+
+        /* ================================================
+           FILE SIZE
+        ================================================= */
+
+        if (
+          file.size >
+          5 * 1024 * 1024
+        ) {
+
+          showError(
+            "Slip file size 5MB အောက် ဖြစ်ရပါမယ်"
+          );
+
+          return;
+        }
+
+
+        /* ================================================
            PAYMENT METHOD
-        =================================== */
+        ================================================= */
 
         const selectedMethod =
           window.selectedPaymentMethod ||
           "KBZPay";
 
 
-        /* ===================================
-           ORDER ID
-        =================================== */
+        /* ================================================
+           CREATE ORDER ID
+        ================================================= */
 
-        let id = "";
+        let orderId;
+
 
         if (
           window.crypto &&
-          crypto.randomUUID
+          typeof crypto.randomUUID ===
+            "function"
         ) {
 
-          id =
+          orderId =
             "WC-" +
             crypto
               .randomUUID()
-              .slice(0, 8)
+              .substring(0, 8)
               .toUpperCase();
 
         } else {
 
-          id =
+          orderId =
             "WC-" +
             Math.random()
               .toString(36)
@@ -238,9 +425,9 @@ if (!form) {
         }
 
 
-        /* ===================================
+        /* ================================================
            FILE EXTENSION
-        =================================== */
+        ================================================= */
 
         let ext = "jpg";
 
@@ -276,31 +463,32 @@ if (!form) {
         }
 
 
-        /* ===================================
+        /* ================================================
            STORAGE PATH
-        =================================== */
+        ================================================= */
 
-        const path =
-          `${id}-${Date.now()}.${ext}`;
-
-
-        /* ===================================
-           1. UPLOAD SLIP
-        =================================== */
-
-        msg.textContent =
-          "Slip တင်နေပါတယ်...";
+        const filePath =
+          `${orderId}-${Date.now()}.${ext}`;
 
 
-        const uploadController =
-          new AbortController();
+        /* ================================================
+           STEP 1
+           UPLOAD SLIP
+        ================================================= */
+
+        showLoading(
+          "① Slip တင်နေပါတယ်..."
+        );
 
 
-        const uploadTimeout =
-          setTimeout(
-            () => uploadController.abort(),
-            30000
-          );
+        console.log(
+          "Uploading:",
+          filePath
+        );
+
+
+        const uploadUrl =
+          `${cfg.url}/storage/v1/object/payment-slips/${encodeURIComponent(filePath)}`;
 
 
         let uploadResponse;
@@ -310,18 +498,11 @@ if (!form) {
 
           uploadResponse =
             await fetch(
-
-              `${cfg.url}/storage/v1/object/payment-slips/${encodeURIComponent(path)}`,
-
+              uploadUrl,
               {
                 method: "POST",
 
                 headers: {
-
-                  /*
-                   * Supabase Storage
-                   * Upload
-                   */
 
                   apikey:
                     cfg.key,
@@ -336,70 +517,79 @@ if (!form) {
                 },
 
                 body:
-                  file,
-
-                signal:
-                  uploadController.signal
-
+                  file
               }
-
             );
 
-        } finally {
+        } catch (uploadNetworkError) {
 
-          clearTimeout(
-            uploadTimeout
+          console.error(
+            "Storage network error:",
+            uploadNetworkError
+          );
+
+          throw new Error(
+            "Storage server ကို ချိတ်ဆက်လို့မရပါ"
           );
 
         }
 
 
-        /* ===================================
-           UPLOAD RESPONSE
-        =================================== */
+        /* ================================================
+           CHECK STORAGE RESPONSE
+        ================================================= */
 
         if (!uploadResponse.ok) {
 
-          let uploadError = "";
+          let storageError = "";
 
           try {
 
-            uploadError =
+            storageError =
               await uploadResponse.text();
 
           } catch {
 
-            uploadError =
-              "Unable to read upload error";
+            storageError =
+              "Unknown Storage error";
 
           }
 
 
+          console.error(
+            "Storage error:",
+            uploadResponse.status,
+            storageError
+          );
+
+
           throw new Error(
-            `Slip upload failed (${uploadResponse.status}): ${uploadError}`
+            `Slip upload failed (${uploadResponse.status})`
           );
 
         }
 
 
         console.log(
-          "Slip uploaded:",
-          path
+          "Slip upload successful:",
+          filePath
         );
 
 
-        /* ===================================
-           2. CREATE PAYMENT DATA
-        =================================== */
+        /* ================================================
+           STEP 2
+           CREATE DATABASE ROW
+        ================================================= */
 
-        msg.textContent =
-          "Payment information သိမ်းနေပါတယ်...";
+        showLoading(
+          "② Payment information သိမ်းနေပါတယ်..."
+        );
 
 
-        const row = {
+        const paymentRow = {
 
           order_id:
-            id,
+            orderId,
 
           name:
             name,
@@ -414,7 +604,7 @@ if (!form) {
             selectedMethod,
 
           slip_path:
-            path,
+            filePath,
 
           status:
             "pending"
@@ -423,53 +613,33 @@ if (!form) {
 
 
         console.log(
-          "Payment row:",
-          row
+          "Database row:",
+          paymentRow
         );
 
 
-        /* ===================================
-           3. SAVE PAYMENT TO SUPABASE
-        =================================== */
-
-        const insertController =
-          new AbortController();
+        const databaseUrl =
+          `${cfg.url}/rest/v1/payments`;
 
 
-        const insertTimeout =
-          setTimeout(
-            () => insertController.abort(),
-            30000
-          );
-
-
-        let insertResponse;
+        let databaseResponse;
 
 
         try {
 
-          insertResponse =
+          databaseResponse =
             await fetch(
-
-              `${cfg.url}/rest/v1/payments`,
-
+              databaseUrl,
               {
-
-                method:
-                  "POST",
+                method: "POST",
 
                 headers: {
 
                   /*
                    * IMPORTANT
                    *
-                   * Publishable key ကို
-                   * apikey header မှာပဲသုံးမယ်။
-                   *
-                   * Authorization:
-                   * Bearer ...
-                   *
-                   * မထည့်ပါ။
+                   * Supabase publishable key
+                   * ကို apikey မှာပဲပို့မယ်။
                    */
 
                   apikey:
@@ -484,175 +654,206 @@ if (!form) {
                 },
 
                 body:
-                  JSON.stringify(row),
-
-                signal:
-                  insertController.signal
-
+                  JSON.stringify(
+                    paymentRow
+                  )
               }
-
             );
 
-        } finally {
+        } catch (databaseNetworkError) {
 
-          clearTimeout(
-            insertTimeout
+          console.error(
+            "Database network error:",
+            databaseNetworkError
+          );
+
+          throw new Error(
+            "Database server ကို ချိတ်ဆက်လို့မရပါ"
           );
 
         }
 
 
-        /* ===================================
-           4. CHECK DATABASE RESPONSE
-        =================================== */
+        /* ================================================
+           CHECK DATABASE
+        ================================================= */
 
-        if (!insertResponse.ok) {
+        if (!databaseResponse.ok) {
 
-          let dbError = "";
+          let databaseError = "";
 
           try {
 
-            dbError =
-              await insertResponse.text();
+            databaseError =
+              await databaseResponse.text();
 
           } catch {
 
-            dbError =
-              "Unable to read database error";
+            databaseError =
+              "Unknown database error";
 
           }
 
 
           console.error(
-            "Supabase INSERT error:",
-            insertResponse.status,
-            dbError
+            "Database error:",
+            databaseResponse.status,
+            databaseError
           );
 
 
           throw new Error(
-            `Payment save failed (${insertResponse.status}): ${dbError}`
+            `Payment save failed (${databaseResponse.status}): ${databaseError}`
           );
 
         }
 
 
-        /* ===================================
-           5. SUCCESS
-        =================================== */
+        /* ================================================
+           SUCCESS
+        ================================================= */
+
+        console.log(
+          "Payment successfully submitted:",
+          orderId
+        );
+
 
         form.reset();
 
 
-        msg.innerHTML = `
+        if (uploadText) {
 
-          <b>✓ Payment submitted</b><br><br>
+          uploadText.textContent =
+            "Transfer Slip ရွေးပါ";
 
-          Payment Method:
-          ${selectedMethod}<br>
-
-          Order ID:
-          ${id}<br><br>
-
-          ငွေဝင်ရောက်မှု စစ်ဆေးပြီးမှ
-          Certificate ထုတ်ပေးပါမယ်။
-
-        `;
+        }
 
 
-        console.log(
-          "Payment submitted successfully:",
-          {
-            order_id: id,
-            name: name,
-            email: email,
-            amount: 50000,
-            method: selectedMethod,
-            slip_path: path
-          }
-        );
+        if (msg) {
+
+          msg.innerHTML = `
+
+            <div style="
+              color:#f7c45c;
+              font-weight:700;
+              line-height:1.8;
+            ">
+
+              ✓ Payment submitted
+
+            </div>
+
+            <div style="
+              margin-top:8px;
+              color:#ccc;
+              line-height:1.8;
+            ">
+
+              Payment Method:
+              ${escapeHtml(selectedMethod)}
+              <br>
+
+              Order ID:
+              <strong>
+                ${escapeHtml(orderId)}
+              </strong>
+
+              <br><br>
+
+              ငွေဝင်ရောက်မှု စစ်ဆေးပြီးမှ
+              Certificate ထုတ်ပေးပါမယ်။
+
+            </div>
+
+          `;
+
+        }
 
 
-      } catch (err) {
+      } catch (error) {
 
 
-        /* ===================================
-           CONSOLE ERROR
-        =================================== */
+        /* ================================================
+           ERROR
+        ================================================= */
 
         console.error(
           "Payment Error:",
-          err
+          error
         );
 
 
-        /* ===================================
-           TIMEOUT
-        =================================== */
-
-        if (
-          err.name ===
-          "AbortError"
-        ) {
-
-          msg.innerHTML = `
-
-            <b>❌ Request Timeout</b><br><br>
-
-            Server ကိုချိတ်ဆက်တာ
-            အချိန်ကြာသွားပါတယ်။<br>
-
-            Internet connection ကိုစစ်ပြီး
-            ထပ်စမ်းပါ။
-
-          `;
-
-          return;
-
-        }
-
-
-        /* ===================================
-           NETWORK ERROR
-        =================================== */
-
-        if (
-          err instanceof TypeError &&
-          err.message ===
-          "Failed to fetch"
-        ) {
-
-          msg.innerHTML = `
-
-            <b>❌ Server Connection Error</b><br><br>
-
-            Supabase server ကို
-            ချိတ်ဆက်လို့မရပါ။<br><br>
-
-            ခဏစောင့်ပြီး ထပ်စမ်းပါ။
-
-          `;
-
-          return;
-
-        }
-
-
-        /* ===================================
-           NORMAL ERROR
-        =================================== */
-
-        msg.innerHTML = `
-
-          <b>❌ Payment မအောင်မြင်ပါ</b><br><br>
-
-          ${err.message}
-
-        `;
+        showError(
+          error.message ||
+          "Payment မအောင်မြင်ပါ"
+        );
 
       }
 
     }
   );
 
-}
+
+  /* =======================================================
+     HELPERS
+  ======================================================= */
+
+  function showLoading(text) {
+
+    if (!msg) {
+      return;
+    }
+
+    msg.innerHTML = `
+
+      <div style="
+        color:#f7c45c;
+        font-weight:600;
+        line-height:1.8;
+      ">
+
+        ${escapeHtml(text)}
+
+      </div>
+
+    `;
+
+  }
+
+
+  function showError(text) {
+
+    if (!msg) {
+      return;
+    }
+
+    msg.innerHTML = `
+
+      <div style="
+        color:#ff6b6b;
+        font-weight:700;
+        line-height:1.8;
+      ">
+
+        ❌ ${escapeHtml(text)}
+
+      </div>
+
+    `;
+
+  }
+
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+});
