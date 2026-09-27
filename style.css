@@ -1582,3 +1582,132 @@ a {
     font-size: 13px;
   }
 }
+
+/* =================================
+   CERTIFICATE FINAL FIX
+================================= */
+
+.certificate-border {
+  position: relative;
+  padding: 16px 20px 52px;
+}
+
+.certificate-title {
+  margin-top: 12px;
+}
+
+.certificate-present {
+  margin-top: 7px;
+}
+
+.certificate-name {
+  margin-top: 4px;
+  font-size: 23px;
+}
+
+.certificate-line {
+  width: 55%;
+  margin: 5px auto 8px;
+}
+
+.certificate-border p {
+  position: absolute;
+  left: 50%;
+  bottom: 27px;
+  transform: translateX(-50%);
+  width: 55%;
+  max-width: 220px;
+  margin: 0;
+  font-size: 7px;
+  line-height: 1.45;
+}
+
+.certificate-meta {
+  bottom: 8px;
+  left: 14px;
+  right: 14px;
+  z-index: 3;
+}
+
+.certificate-meta small {
+  font-size: 5px;
+}
+
+.certificate-meta strong {
+  font-size: 6px;
+}
+
+.verified-seal {
+  right: 10px;
+  bottom: 22px;
+  width: 34px;
+  height: 34px;
+  font-size: 13px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .certificate-border {
+    padding: 12px 14px 45px;
+  }
+
+  .certificate-crown {
+    font-size: 19px;
+  }
+
+  .certificate-brand {
+    font-size: 13px;
+  }
+
+  .certificate-title {
+    margin-top: 8px;
+    font-size: 11px;
+  }
+
+  .certificate-present {
+    margin-top: 6px;
+    font-size: 6px;
+  }
+
+  .certificate-name {
+    font-size: 17px;
+    margin-top: 3px;
+  }
+
+  .certificate-line {
+    margin: 4px auto 6px;
+  }
+
+  .certificate-border p {
+    bottom: 23px;
+    width: 58%;
+    max-width: 185px;
+    font-size: 5px;
+    line-height: 1.35;
+  }
+
+  .certificate-meta {
+    bottom: 7px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .certificate-meta small {
+    font-size: 4px;
+  }
+
+  .certificate-meta strong {
+    font-size: 5px;
+  }
+
+  .verified-seal {
+    right: 7px;
+    bottom: 17px;
+    width: 29px;
+    height: 29px;
+    font-size: 11px;
+  }
+}
