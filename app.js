@@ -18,13 +18,17 @@ function copyText(id) {
 
   const text = el.textContent.trim();
 
-  navigator.clipboard.writeText(text)
-    .then(() => {
-      console.log("Copied:", text);
-    })
-    .catch((err) => {
-      console.error("Copy failed:", err);
-    });
+  if (navigator.clipboard) {
+
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        console.log("Copied:", text);
+      })
+      .catch((err) => {
+        console.error("Copy failed:", err);
+      });
+
+  }
 
 }
 
@@ -41,7 +45,7 @@ const msg =
 
 
 /* =========================================
-   CHECK FORM
+   FORM CHECK
 ========================================= */
 
 if (!form) {
@@ -54,7 +58,7 @@ if (!form) {
 
 
   /* =======================================
-     SUBMIT PAYMENT
+     SUBMIT FORM
   ======================================= */
 
   form.addEventListener(
@@ -68,37 +72,55 @@ if (!form) {
          INITIAL MESSAGE
       ===================================== */
 
-      msg.textContent =
-        "Submitting...";
+      if (msg) {
+
+        msg.textContent =
+          "Submitting...";
+
+      }
 
 
       try {
 
 
         /* ===================================
-           GET FORM DATA
+           GET NAME
         =================================== */
 
-        const name =
-          document
-            .getElementById("name")
-            .value
-            .trim();
+        const nameEl =
+          document.getElementById("name");
 
+        const name =
+          nameEl
+            ? nameEl.value.trim()
+            : "";
+
+
+        /* ===================================
+           GET EMAIL
+        =================================== */
+
+        const emailEl =
+          document.getElementById("email");
 
         const email =
-          document
-            .getElementById("email")
-            .value
-            .trim();
+          emailEl
+            ? emailEl.value.trim()
+            : "";
 
+
+        /* ===================================
+           GET SLIP
+        =================================== */
 
         const fileInput =
           document.getElementById("slip");
 
-
         const file =
-          fileInput?.files?.[0];
+          fileInput &&
+          fileInput.files
+            ? fileInput.files[0]
+            : null;
 
 
         /* ===================================
@@ -190,12 +212,30 @@ if (!form) {
            ORDER ID
         =================================== */
 
-        const id =
-          "WC-" +
-          crypto
-            .randomUUID()
-            .slice(0, 8)
-            .toUpperCase();
+        let id = "";
+
+        if (
+          window.crypto &&
+          crypto.randomUUID
+        ) {
+
+          id =
+            "WC-" +
+            crypto
+              .randomUUID()
+              .slice(0, 8)
+              .toUpperCase();
+
+        } else {
+
+          id =
+            "WC-" +
+            Math.random()
+              .toString(36)
+              .substring(2, 10)
+              .toUpperCase();
+
+        }
 
 
         /* ===================================
@@ -219,10 +259,6 @@ if (!form) {
         }
 
 
-        /* ===================================
-           CLEAN EXTENSION
-        =================================== */
-
         const allowedExtensions = [
           "jpg",
           "jpeg",
@@ -241,7 +277,7 @@ if (!form) {
 
 
         /* ===================================
-           STORAGE FILE PATH
+           STORAGE PATH
         =================================== */
 
         const path =
@@ -249,112 +285,111 @@ if (!form) {
 
 
         /* ===================================
-           1. UPLOAD PAYMENT SLIP
+           1. UPLOAD SLIP
         =================================== */
 
         msg.textContent =
           "Slip တင်နေပါတယ်...";
 
 
-        const controller =
+        const uploadController =
           new AbortController();
 
 
-        const timeout =
+        const uploadTimeout =
           setTimeout(
-            () => controller.abort(),
+            () => uploadController.abort(),
             30000
           );
 
 
-        let up;
+        let uploadResponse;
 
 
         try {
 
-          up = await fetch(
+          uploadResponse =
+            await fetch(
 
-            `${cfg.url}/storage/v1/object/payment-slips/${encodeURIComponent(path)}`,
+              `${cfg.url}/storage/v1/object/payment-slips/${encodeURIComponent(path)}`,
 
-            {
+              {
+                method: "POST",
 
-              method:
-                "POST",
+                headers: {
 
+                  /*
+                   * Supabase Storage
+                   * Upload
+                   */
 
-              headers: {
+                  apikey:
+                    cfg.key,
 
-                /*
-                 * IMPORTANT
-                 *
-                 * Storage upload အတွက်
-                 * publishable API key ကို
-                 * apikey header ထဲမှာပဲ ပို့မယ်
-                 */
+                  "Content-Type":
+                    file.type ||
+                    "image/jpeg",
 
-                apikey:
-                  cfg.key,
+                  "x-upsert":
+                    "false"
 
+                },
 
-                "Content-Type":
-                  file.type ||
-                  "image/jpeg",
+                body:
+                  file,
 
+                signal:
+                  uploadController.signal
 
-                "x-upsert":
-                  "false"
+              }
 
-              },
-
-
-              body:
-                file,
-
-
-              signal:
-                controller.signal
-
-            }
-
-          );
+            );
 
         } finally {
 
-          clearTimeout(timeout);
+          clearTimeout(
+            uploadTimeout
+          );
 
         }
 
 
         /* ===================================
-           CHECK UPLOAD RESPONSE
+           UPLOAD RESPONSE
         =================================== */
 
-        if (!up.ok) {
+        if (!uploadResponse.ok) {
 
-          let errorText = "";
+          let uploadError = "";
 
           try {
 
-            errorText =
-              await up.text();
+            uploadError =
+              await uploadResponse.text();
 
           } catch {
 
-            errorText =
-              "Unknown upload error";
+            uploadError =
+              "Unable to read upload error";
 
           }
 
 
           throw new Error(
-            `Slip upload failed (${up.status}): ${errorText}`
+            `Slip upload failed (${uploadResponse.status}): ${uploadError}`
           );
 
         }
 
 
+        console.log(
+          "Slip uploaded:",
+          path
+        );
+
+
         /* ===================================
-           2. CREATE PAYMENT RECORD
+           2. CREATE PAYMENT DATA
         =================================== */
 
         msg.textContent =
@@ -387,79 +422,123 @@ if (!form) {
         };
 
 
+        console.log(
+          "Payment row:",
+          row
+        );
+
+
         /* ===================================
-           SAVE TO SUPABASE
+           3. SAVE PAYMENT TO SUPABASE
         =================================== */
 
-        const ins =
-          await fetch(
-
-            `${cfg.url}/rest/v1/payments`,
-
-            {
-
-              method:
-                "POST",
+        const insertController =
+          new AbortController();
 
 
-              headers: {
-
-                apikey:
-                  cfg.key,
-
-
-                Authorization:
-                  `Bearer ${cfg.key}`,
-
-
-                "Content-Type":
-                  "application/json",
-
-
-                Prefer:
-                  "return=minimal"
-
-              },
-
-
-              body:
-                JSON.stringify(row)
-
-            }
-
+        const insertTimeout =
+          setTimeout(
+            () => insertController.abort(),
+            30000
           );
 
 
-        /* ===================================
-           CHECK DATABASE RESPONSE
-        =================================== */
-
-        if (!ins.ok) {
-
-          let errorText = "";
-
-          try {
-
-            errorText =
-              await ins.text();
-
-          } catch {
-
-            errorText =
-              "Unknown database error";
-
-          }
+        let insertResponse;
 
 
-          throw new Error(
-            `Payment save failed (${ins.status}): ${errorText}`
+        try {
+
+          insertResponse =
+            await fetch(
+
+              `${cfg.url}/rest/v1/payments`,
+
+              {
+
+                method:
+                  "POST",
+
+                headers: {
+
+                  /*
+                   * IMPORTANT
+                   *
+                   * Publishable key ကို
+                   * apikey header မှာပဲသုံးမယ်။
+                   *
+                   * Authorization:
+                   * Bearer ...
+                   *
+                   * မထည့်ပါ။
+                   */
+
+                  apikey:
+                    cfg.key,
+
+                  "Content-Type":
+                    "application/json",
+
+                  Prefer:
+                    "return=minimal"
+
+                },
+
+                body:
+                  JSON.stringify(row),
+
+                signal:
+                  insertController.signal
+
+              }
+
+            );
+
+        } finally {
+
+          clearTimeout(
+            insertTimeout
           );
 
         }
 
 
         /* ===================================
-           SUCCESS
+           4. CHECK DATABASE RESPONSE
+        =================================== */
+
+        if (!insertResponse.ok) {
+
+          let dbError = "";
+
+          try {
+
+            dbError =
+              await insertResponse.text();
+
+          } catch {
+
+            dbError =
+              "Unable to read database error";
+
+          }
+
+
+          console.error(
+            "Supabase INSERT error:",
+            insertResponse.status,
+            dbError
+          );
+
+
+          throw new Error(
+            `Payment save failed (${insertResponse.status}): ${dbError}`
+          );
+
+        }
+
+
+        /* ===================================
+           5. SUCCESS
         =================================== */
 
         form.reset();
@@ -487,6 +566,7 @@ if (!form) {
             order_id: id,
             name: name,
             email: email,
+            amount: 50000,
             method: selectedMethod,
             slip_path: path
           }
@@ -497,7 +577,7 @@ if (!form) {
 
 
         /* ===================================
-           ERROR LOG
+           CONSOLE ERROR
         =================================== */
 
         console.error(
@@ -507,7 +587,7 @@ if (!form) {
 
 
         /* ===================================
-           TIMEOUT ERROR
+           TIMEOUT
         =================================== */
 
         if (
@@ -517,9 +597,10 @@ if (!form) {
 
           msg.innerHTML = `
 
-            <b>❌ Upload Timeout</b><br><br>
+            <b>❌ Request Timeout</b><br><br>
 
-            Slip တင်တာ အချိန်ကြာသွားပါတယ်။<br>
+            Server ကိုချိတ်ဆက်တာ
+            အချိန်ကြာသွားပါတယ်။<br>
 
             Internet connection ကိုစစ်ပြီး
             ထပ်စမ်းပါ။
@@ -537,17 +618,18 @@ if (!form) {
 
         if (
           err instanceof TypeError &&
-          err.message === "Failed to fetch"
+          err.message ===
+          "Failed to fetch"
         ) {
 
           msg.innerHTML = `
 
-            <b>❌ Slip Upload မအောင်မြင်ပါ</b><br><br>
+            <b>❌ Server Connection Error</b><br><br>
 
-            Server ကိုချိတ်ဆက်လို့မရပါ။<br>
+            Supabase server ကို
+            ချိတ်ဆက်လို့မရပါ။<br><br>
 
-            Internet connection ကိုစစ်ပြီး
-            ခဏစောင့်ကာ ထပ်စမ်းပါ။
+            ခဏစောင့်ပြီး ထပ်စမ်းပါ။
 
           `;
 
