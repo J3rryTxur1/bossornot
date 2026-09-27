@@ -1188,3 +1188,258 @@ a {
   }
 
 }
+
+/* =================================
+   FINAL MOBILE POLISH
+================================= */
+
+@media (max-width: 600px) {
+
+  /* HERO */
+  .hero {
+    min-height: auto;
+    padding: 30px 18px 24px;
+    gap: 18px;
+  }
+
+  .hero h1 {
+    font-size: 27px;
+    line-height: 1.42;
+  }
+
+  .hero-description {
+    font-size: 11px;
+    line-height: 1.8;
+    margin-top: 15px;
+  }
+
+  .hero-features {
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+
+  .hero-feature > span {
+    width: 29px;
+    height: 29px;
+    font-size: 10px;
+  }
+
+  .hero-feature strong {
+    font-size: 9px;
+  }
+
+  .hero-feature small {
+    font-size: 7px;
+  }
+
+  .hero .cta {
+    min-height: 50px;
+    font-size: 12px;
+  }
+
+
+  /* CERTIFICATE */
+  .certificate-card {
+    width: 94%;
+    margin: 8px auto 0;
+  }
+
+  .certificate-border {
+    padding: 15px;
+  }
+
+  .certificate-brand {
+    font-size: 16px;
+  }
+
+  .certificate-title {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+
+  .certificate-name {
+    font-size: 20px;
+  }
+
+  .certificate-border p {
+    font-size: 7px;
+  }
+
+
+  /* HOW IT WORKS */
+  .info-section {
+    padding: 30px 14px;
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .section-heading h2 {
+    font-size: 23px;
+  }
+
+  .steps {
+    grid-template-columns:
+      1fr 35px 1fr 35px 1fr;
+
+    gap: 0;
+  }
+
+  .step-number {
+    width: 38px;
+    height: 38px;
+    font-size: 11px;
+  }
+
+  .step-icon {
+    font-size: 23px;
+    margin: 14px 0 7px;
+  }
+
+  .step h3 {
+    font-size: 16px;
+  }
+
+  .step p {
+    font-size: 8px;
+    line-height: 1.6;
+  }
+
+  .step-arrow {
+    transform: none;
+    font-size: 20px;
+  }
+
+
+  /* WHY BOSSORNOT */
+  .benefits {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .benefit {
+    min-height: 145px;
+    padding: 14px 11px;
+    display: block;
+  }
+
+  .benefit-icon {
+    width: 37px;
+    height: 37px;
+    margin-bottom: 10px;
+  }
+
+  .benefit h3 {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .benefit p {
+    font-size: 8px;
+    line-height: 1.65;
+  }
+
+
+  /* PAYMENT */
+  .payment-section {
+    padding: 24px 14px;
+  }
+
+  .payment-intro h2 {
+    font-size: 25px;
+  }
+
+  .payment-intro p {
+    font-size: 9px;
+    line-height: 1.7;
+  }
+
+  .method-card {
+    width: 130px;
+    min-height: 88px;
+  }
+
+
+  /* PAYMENT CONTENT */
+  .payment-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .total strong {
+    font-size: 20px;
+  }
+
+  .total {
+    padding: 14px;
+  }
+
+  .payment-row {
+    min-height: 52px;
+    padding: 10px 12px;
+  }
+
+  .payment-row > span {
+    font-size: 8px;
+  }
+
+  .payment-row b {
+    font-size: 9px;
+  }
+
+  .copy-btn {
+    font-size: 8px;
+    padding: 4px 7px;
+  }
+
+  .qrbox {
+    padding: 12px;
+  }
+
+  .qr-image-wrap {
+    width: 145px;
+    height: 145px;
+  }
+
+  .qrbox small {
+    font-size: 8px;
+  }
+
+
+  /* FORM */
+  .form-heading strong {
+    font-size: 15px;
+  }
+
+  .form-heading small {
+    font-size: 8px;
+  }
+
+  .form-group label {
+    font-size: 8px;
+  }
+
+  .form-group input {
+    height: 44px;
+    font-size: 10px;
+  }
+
+  .upload-box {
+    min-height: 90px;
+    padding: 12px;
+  }
+
+  .upload-text strong {
+    font-size: 9px;
+  }
+
+  .upload-text small {
+    font-size: 7px;
+  }
+
+  .cta.wide {
+    min-height: 48px;
+    font-size: 11px;
+  }
+}
