@@ -2,7 +2,6 @@
 <html lang="my">
 
 <head>
-
   <meta charset="utf-8">
 
   <meta
@@ -15,100 +14,395 @@
     content="#080909"
   >
 
-  <title>Wealth Showcase</title>
+  <meta
+    name="description"
+    content="BOSSORNOT — Verified Digital Certificate Service"
+  >
 
+  <title>BOSSORNOT — Wealth Showcase</title>
 
-  <!-- =========================================
-       PREMIUM MYANMAR FONTS
-  ========================================== -->
-
+  <!-- Myanmar Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&family=Noto+Serif+Myanmar:wght@600;700;800&display=swap"
     rel="stylesheet"
   >
 
-
   <!-- Main CSS -->
-
-  <link
-    rel="stylesheet"
-    href="/style.css"
-  >
-
+  <link rel="stylesheet" href="/style.css">
 </head>
-
 
 <body>
 
-
 <main class="wrap">
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <header class="topbar">
+
+    <a href="/" class="logo">
+      <span class="logo-crown">♛</span>
+
+      <span>
+        <strong>BOSSORNOT</strong>
+        <small>WEALTH SHOWCASE</small>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#how">How It Works</a>
+      <a href="#why">Why Us</a>
+      <a href="#certificate">Certificate</a>
+
+      <button
+        type="button"
+        class="nav-cta"
+        onclick="document.getElementById('payBtn').click()"
+      >
+        Get Certificate
+      </button>
+    </nav>
+
+  </header>
 
 
   <!-- =========================================
        HERO
   ========================================== -->
 
-  <section class="hero card">
+  <section class="hero premium-card" id="home">
 
+    <div class="hero-content">
 
-    <div class="brand">
+      <div class="eyebrow">
+        ♛ &nbsp; WEALTH SHOWCASE
+      </div>
 
-      <span class="crown">
-        ♛
-      </span>
+      <h1>
+        သင့်အောင်မြင်မှုကို<br>
+        <b>Certificate</b> တစ်ခုအဖြစ်<br>
+        သိမ်းဆည်းလိုက်ပါ။
+      </h1>
 
-      WEALTH
+      <p class="hero-description">
+        50,000 MMK ဖြင့် သင့်အမည်ပါဝင်သော
+        <strong>Verified Digital Certificate</strong>
+        ကို ရယူလိုက်ပါ။
+      </p>
 
-      <span>
-        SHOWCASE
-      </span>
+      <div class="hero-features">
+
+        <div class="hero-feature">
+          <span>✓</span>
+          <div>
+            <strong>Verified</strong>
+            <small>Certificate</small>
+          </div>
+        </div>
+
+        <div class="hero-feature">
+          <span>✉</span>
+          <div>
+            <strong>Email</strong>
+            <small>Delivery</small>
+          </div>
+        </div>
+
+        <div class="hero-feature">
+          <span>✦</span>
+          <div>
+            <strong>Unique</strong>
+            <small>Certificate ID</small>
+          </div>
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="cta"
+        id="payBtn"
+      >
+        <span class="btn-text">
+          50,000 MMK ဖြင့် ရယူမည်
+        </span>
+
+        <span class="btn-arrow">→</span>
+      </button>
 
     </div>
 
 
-    <h1>
+    <!-- CERTIFICATE PREVIEW -->
 
-      သင်ချမ်းသာကြောင်း<br>
-
-      <b>
-        ပြသလိုက်ပါ
-      </b>
-
-    </h1>
-
-
-    <p>
-
-      50,000 MMK ပေးချေပြီး Transfer Slip တင်ပါ။<br>
-
-      ငွေဝင်ရောက်မှုကို ကိုယ်တိုင်စစ်ဆေးပြီးမှ<br>
-
-      Certificate ထုတ်ပေးပါမယ်။
-
-    </p>
-
-
-    <!-- MAIN PAYMENT BUTTON -->
-
-    <button
-      type="button"
-      class="cta"
-      id="payBtn"
+    <div
+      class="certificate-preview"
+      id="certificate"
     >
 
-      <span class="btn-text">
-        50,000 MMK ပေးချေရန်
-      </span>
+      <div class="certificate-card">
 
-      <span class="btn-arrow">
-        →
-      </span>
+        <div class="certificate-border">
 
-    </button>
+          <div class="certificate-crown">
+            ♛
+          </div>
 
+          <div class="certificate-brand">
+            BOSSORNOT
+          </div>
+
+          <div class="certificate-sub">
+            WEALTH SHOWCASE
+          </div>
+
+          <div class="certificate-title">
+            VERIFIED CERTIFICATE
+          </div>
+
+          <div class="certificate-present">
+            This certificate is proudly presented to
+          </div>
+
+          <div class="certificate-name">
+            YOUR NAME
+          </div>
+
+          <div class="certificate-line"></div>
+
+          <p>
+            This certificate is issued as a
+            digital recognition of achievement
+            and verified payment.
+          </p>
+
+          <div class="certificate-meta">
+
+            <div>
+              <small>Certificate ID</small>
+              <strong>BOSS-XXXXXXXX</strong>
+            </div>
+
+            <div>
+              <small>Date Issued</small>
+              <strong>2026</strong>
+            </div>
+
+          </div>
+
+          <div class="verified-seal">
+            ✓
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 
   </section>
 
+
+  <!-- =========================================
+       HOW IT WORKS
+  ========================================== -->
+
+  <section
+    class="info-section premium-card"
+    id="how"
+  >
+
+    <div class="section-heading">
+
+      <span>HOW IT WORKS</span>
+
+      <h2>
+        ရိုးရှင်းတဲ့ အဆင့် ၃ ဆင့်
+      </h2>
+
+      <p>
+        Payment ပြုလုပ်ပြီး Certificate ရယူရန်
+        လွယ်ကူသော အဆင့်များ
+      </p>
+
+    </div>
+
+
+    <div class="steps">
+
+      <div class="step">
+
+        <div class="step-number">
+          01
+        </div>
+
+        <div class="step-icon">
+          ◈
+        </div>
+
+        <h3>Pay</h3>
+
+        <p>
+          50,000 MMK<br>
+          ပေးချေပါ
+        </p>
+
+      </div>
+
+
+      <div class="step-arrow">
+        →
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          02
+        </div>
+
+        <div class="step-icon">
+          ◫
+        </div>
+
+        <h3>Verify</h3>
+
+        <p>
+          Payment ကို manual<br>
+          စစ်ဆေးပေးပါမယ်
+        </p>
+
+      </div>
+
+
+      <div class="step-arrow">
+        →
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          03
+        </div>
+
+        <div class="step-icon">
+          ✉
+        </div>
+
+        <h3>Receive</h3>
+
+        <p>
+          Verified Certificate ကို<br>
+          Email မှာ ရရှိပါမယ်
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       WHY BOSSORNOT
+  ========================================== -->
+
+  <section
+    class="info-section premium-card"
+    id="why"
+  >
+
+    <div class="section-heading">
+
+      <span>WHY BOSSORNOT?</span>
+
+      <h2>
+        Premium Digital Certificate
+      </h2>
+
+    </div>
+
+
+    <div class="benefits">
+
+      <div class="benefit">
+
+        <div class="benefit-icon">
+          ✓
+        </div>
+
+        <div>
+          <h3>Manual Verification</h3>
+
+          <p>
+            Payment ဝင်ရောက်မှုကို
+            ကိုယ်တိုင်စစ်ဆေးပြီးမှ
+            Certificate ထုတ်ပေးပါမယ်။
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <div class="benefit-icon">
+          ✉
+        </div>
+
+        <div>
+          <h3>Digital Certificate</h3>
+
+          <p>
+            Certificate ကို Digital Format
+            ဖြင့် အလွယ်တကူ ရယူနိုင်ပါတယ်။
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <div class="benefit-icon">
+          ✦
+        </div>
+
+        <div>
+          <h3>Unique Certificate ID</h3>
+
+          <p>
+            Certificate တစ်ခုချင်းစီအတွက်
+            Unique ID ပါဝင်ပါတယ်။
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <div class="benefit-icon">
+          🔒
+        </div>
+
+        <div>
+          <h3>Secure & Private</h3>
+
+          <p>
+            သင့်ရဲ့ Certificate details
+            ကို သီးသန့်စီမံပေးပါတယ်။
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
 
 
   <!-- =========================================
@@ -120,96 +414,7 @@
     class="card payment-section"
   >
 
-
-    <!-- =======================================
-         PAYMENT METHOD SELECTOR
-    ======================================== -->
-
-    <div class="method-picker">
-
-
-      <div class="method-title">
-        ငွေပေးချေရန် ရွေးပါ
-      </div>
-
-
-      <div class="payment-methods">
-
-
-        <!-- ===================================
-             KBZ PAY
-        ==================================== -->
-
-        <button
-          type="button"
-          class="method-card active"
-          data-method="kbz"
-        >
-
-
-          <div class="method-logo">
-
-            <img
-              src="/kbzpay-logo.png"
-              alt="KBZPay"
-            >
-
-          </div>
-
-
-          <div class="method-name">
-            KBZPay
-          </div>
-
-
-        </button>
-
-
-
-        <!-- ===================================
-             WAVE MONEY
-        ==================================== -->
-
-        <button
-          type="button"
-          class="method-card"
-          data-method="wave"
-        >
-
-
-          <div class="method-logo">
-
-            <img
-              src="/wavepay-logo.png"
-              alt="Wave Money"
-            >
-
-          </div>
-
-
-          <div class="method-name">
-            Wave Money
-          </div>
-
-
-        </button>
-
-
-      </div>
-
-    </div>
-
-
-
-    <!-- =========================================
-         PAYMENT HEADER
-    ========================================== -->
-
-    <div
-      class="payment-header"
-      id="paymentHeader"
-    >
-
+    <div class="payment-intro">
 
       <div
         class="payment-badge"
@@ -218,354 +423,383 @@
         SECURE PAYMENT · KBZPAY
       </div>
 
-
       <h2>
-        Complete your payment
+        Complete <span>your payment</span>
       </h2>
 
-
       <p id="paymentDescription">
-
         အောက်ပါ KBZPay အချက်အလက်များအတိုင်း
         ငွေပေးချေပြီး Transfer Screenshot တင်ပါ။
-
       </p>
 
-
     </div>
 
 
+    <!-- PAYMENT METHOD -->
 
-    <!-- =========================================
-         TOTAL
-    ========================================== -->
+    <div class="method-picker">
 
-    <div class="total">
-
-
-      <div class="total-label">
-
-
-        <span class="total-icon">
-          ◆
-        </span>
-
-
-        <div>
-
-
-          <small>
-            Total to pay
-          </small>
-
-
-          <strong>
-            50,000 MMK
-          </strong>
-
-
-        </div>
-
-
+      <div class="method-title">
+        ငွေပေးချေရန် ရွေးပါ
       </div>
 
-
-      <div class="verified-badge">
-        ✓
-      </div>
-
-
-    </div>
-
-
-
-    <!-- =========================================
-         PAYMENT INFORMATION
-    ========================================== -->
-
-    <div class="paybox">
-
-
-      <!-- PAYMENT METHOD -->
-
-      <div class="payment-row">
-
-
-        <span>
-          Payment
-        </span>
-
-
-        <b id="paymentMethod">
-          KBZPay
-        </b>
-
-
-      </div>
-
-
-
-      <!-- ACCOUNT NUMBER -->
-
-      <div class="payment-row account-row">
-
-
-        <span>
-          Account Number
-        </span>
-
-
-        <div class="account-value">
-
-
-          <b id="acct">
-            09693940585
-          </b>
-
-
-          <button
-            type="button"
-            class="copy-btn"
-            onclick="copyText('acct')"
-          >
-            Copy
-          </button>
-
-
-        </div>
-
-
-      </div>
-
-
-
-      <!-- ACCOUNT NAME -->
-
-      <div class="payment-row">
-
-
-        <span>
-          Account Name
-        </span>
-
-
-        <b id="accountName">
-          U SAI HTET MYAT THAW
-        </b>
-
-
-      </div>
-
-
-
-      <!-- =======================================
-           QR CODE
-      ======================================== -->
-
-      <div class="qrbox">
-
-
-        <div
-          class="qr-title"
-          id="qrTitle"
-        >
-          KBZPay QR
-        </div>
-
-
-        <div class="qr-image-wrap">
-
-
-          <img
-            id="qrImage"
-            src="/kbzpay-qr.jpg"
-            alt="KBZPay QR Code"
-            class="qr-image"
-          >
-
-
-        </div>
-
-
-        <small id="qrNote">
-
-          KBZPay ဖြင့် Scan ပြီး
-          50,000 MMK ပေးချေပါ
-
-        </small>
-
-
-      </div>
-
-
-    </div>
-
-
-
-    <!-- =========================================
-         FORM
-    ========================================== -->
-
-    <form
-      id="payform"
-      autocomplete="on"
-    >
-
-
-      <!-- FULL NAME -->
-
-      <div class="form-group">
-
-
-        <label for="name">
-
-          Full Name
-          <span>*</span>
-
-        </label>
-
-
-        <input
-          id="name"
-          name="name"
-          type="text"
-          autocomplete="name"
-          required
-          placeholder="Certificate မှာထည့်မယ့် အမည်"
+      <div class="payment-methods">
+
+        <button
+          type="button"
+          class="method-card active"
+          data-method="kbz"
         >
 
-
-      </div>
-
-
-
-      <!-- EMAIL -->
-
-      <div class="form-group">
-
-
-        <label for="email">
-
-          Email Address
-          <span>*</span>
-
-        </label>
-
-
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autocomplete="email"
-          required
-          placeholder="Certificate ပို့မယ့် Email"
-        >
-
-
-      </div>
-
-
-
-      <!-- TRANSFER SCREENSHOT -->
-
-      <div class="form-group">
-
-
-        <label for="slip">
-
-          Transfer Screenshot
-          <span>*</span>
-
-        </label>
-
-
-        <div class="upload-box">
-
-
-          <div class="upload-icon">
-            ↑
+          <div class="method-logo">
+            <img
+              src="/kbzpay-logo.png"
+              alt="KBZPay"
+            >
           </div>
 
+          <div class="method-name">
+            KBZPay
+          </div>
 
-          <div class="upload-text">
+        </button>
 
 
-            <strong>
-              Transfer Slip ရွေးပါ
-            </strong>
+        <button
+          type="button"
+          class="method-card"
+          data-method="wave"
+        >
 
+          <div class="method-logo">
+            <img
+              src="/wavepay-logo.png"
+              alt="Wave Money"
+            >
+          </div>
+
+          <div class="method-name">
+            Wave Money
+          </div>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- PAYMENT CONTENT -->
+
+    <div class="payment-grid">
+
+
+      <!-- LEFT -->
+
+      <div class="payment-details">
+
+        <div class="total">
+
+          <div>
 
             <small>
-              JPG, PNG, WEBP · 5MB အောက်
+              TOTAL TO PAY
             </small>
 
+            <strong>
+              50,000 MMK
+            </strong>
 
           </div>
 
-
-          <input
-            id="slip"
-            name="slip"
-            type="file"
-            accept="image/png,image/jpeg,image/webp"
-            required
-          >
-
+          <span class="verified-badge">
+            ✓
+          </span>
 
         </div>
 
 
+        <div class="paybox">
+
+          <div class="payment-row">
+
+            <span>
+              Payment
+            </span>
+
+            <b id="paymentMethod">
+              KBZPay
+            </b>
+
+          </div>
+
+
+          <div class="payment-row account-row">
+
+            <span>
+              Account Number
+            </span>
+
+            <div class="account-value">
+
+              <b id="acct">
+                09693940585
+              </b>
+
+              <button
+                type="button"
+                class="copy-btn"
+                onclick="copyText('acct')"
+              >
+                Copy
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="payment-row">
+
+            <span>
+              Account Name
+            </span>
+
+            <b id="accountName">
+              U SAI HTET MYAT THAW
+            </b>
+
+          </div>
+
+        </div>
+
+
+        <!-- QR -->
+
+        <div class="qrbox">
+
+          <div
+            class="qr-title"
+            id="qrTitle"
+          >
+            KBZPay QR
+          </div>
+
+          <div class="qr-image-wrap">
+
+            <img
+              id="qrImage"
+              src="/kbzpay-qr.jpg"
+              alt="KBZPay QR Code"
+              class="qr-image"
+            >
+
+          </div>
+
+          <small id="qrNote">
+            KBZPay ဖြင့် Scan ပြီး
+            50,000 MMK ပေးချေပါ
+          </small>
+
+        </div>
+
       </div>
 
 
+      <!-- RIGHT FORM -->
 
-      <!-- SUBMIT BUTTON -->
+      <div class="certificate-form">
 
-      <button
-        type="submit"
-        class="cta wide"
-      >
+        <div class="form-heading">
 
+          <span>▣</span>
 
-        <span class="btn-text">
-          Payment တင်မည်
-        </span>
+          <div>
+            <strong>
+              Your Certificate Details
+            </strong>
 
+            <small>
+              Certificate အတွက် အချက်အလက်များ
+            </small>
+          </div>
 
-        <span class="btn-arrow">
-          →
-        </span>
-
-
-      </button>
-
-
-    </form>
+        </div>
 
 
+        <form
+          id="payform"
+          autocomplete="on"
+        >
 
-    <!-- MESSAGE -->
+          <!-- NAME -->
 
-    <p
-      id="msg"
-      class="msg"
-      aria-live="polite"
-    ></p>
+          <div class="form-group">
 
+            <label for="name">
+              Full Name
+              <span>*</span>
+            </label>
+
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              placeholder="Certificate မှာထည့်မယ့် အမည်"
+            >
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="form-group">
+
+            <label for="email">
+              Email Address
+              <span>*</span>
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder="Certificate ပို့မယ့် Email"
+            >
+
+          </div>
+
+
+          <!-- SLIP -->
+
+          <div class="form-group">
+
+            <label for="slip">
+              Transfer Screenshot
+              <span>*</span>
+            </label>
+
+            <div class="upload-box">
+
+              <div class="upload-icon">
+                ↑
+              </div>
+
+              <div class="upload-text">
+
+                <strong>
+                  Transfer Slip ရွေးပါ
+                </strong>
+
+                <small>
+                  JPG, PNG, WEBP · 5MB အောက်
+                </small>
+
+              </div>
+
+              <input
+                id="slip"
+                name="slip"
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- SUBMIT -->
+
+          <button
+            type="submit"
+            class="cta wide"
+          >
+
+            <span class="btn-text">
+              Payment တင်မည်
+            </span>
+
+            <span class="btn-arrow">
+              →
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <p
+          id="msg"
+          class="msg"
+          aria-live="polite"
+        ></p>
+
+      </div>
+
+    </div>
 
   </section>
 
 
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer class="footer">
+
+    <div class="footer-brand">
+
+      <span class="logo-crown">
+        ♛
+      </span>
+
+      <div>
+
+        <strong>
+          BOSSORNOT
+        </strong>
+
+        <small>
+          Wealth Showcase
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-center">
+
+      <span>
+        Verified Digital Certificate Service
+      </span>
+
+    </div>
+
+
+    <div class="footer-copy">
+
+      © 2026 BOSSORNOT<br>
+      All Rights Reserved.
+
+    </div>
+
+  </footer>
+
 </main>
 
 
-
 <!-- =========================================
-     APP JS
+     EXISTING APP JS
 ========================================== -->
 
 <script src="/app.js"></script>
-
 
 
 <!-- =========================================
@@ -573,11 +807,6 @@
 ========================================== -->
 
 <script>
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
 
 const payBtn =
   document.getElementById("payBtn");
@@ -589,12 +818,7 @@ const methodCards =
   document.querySelectorAll(".method-card");
 
 
-/* =========================================
-   PAYMENT DATA
-========================================= */
-
 const paymentData = {
-
 
   kbz: {
 
@@ -631,44 +855,24 @@ const paymentData = {
 
   }
 
-
 };
 
-
-
-/* =========================================
-   SELECTED PAYMENT
-========================================= */
 
 window.selectedPaymentMethod =
   "KBZPay";
 
 
-
-/* =========================================
-   UPDATE PAYMENT INFORMATION
-========================================= */
-
 function updatePayment(method) {
-
 
   const data =
     paymentData[method];
 
+  if (!data) return;
 
-  if (!data) {
-    return;
-  }
-
-
-  /* Save selected payment method */
 
   window.selectedPaymentMethod =
     data.method;
 
-
-
-  /* Payment Method */
 
   document
     .getElementById("paymentMethod")
@@ -676,17 +880,11 @@ function updatePayment(method) {
     data.method;
 
 
-
-  /* Account Number */
-
   document
     .getElementById("acct")
     .textContent =
     data.account;
 
-
-
-  /* Account Name */
 
   document
     .getElementById("accountName")
@@ -694,17 +892,11 @@ function updatePayment(method) {
     data.name;
 
 
-
-  /* QR Title */
-
   document
     .getElementById("qrTitle")
     .textContent =
     data.qrTitle;
 
-
-
-  /* QR Image */
 
   const qrImage =
     document.getElementById("qrImage");
@@ -718,17 +910,11 @@ function updatePayment(method) {
     data.qrTitle;
 
 
-
-  /* QR Description */
-
   document
     .getElementById("qrNote")
     .textContent =
     data.note;
 
-
-
-  /* Header Badge */
 
   document
     .getElementById("paymentBadge")
@@ -737,9 +923,6 @@ function updatePayment(method) {
     data.method.toUpperCase();
 
 
-
-  /* Header Description */
-
   document
     .getElementById("paymentDescription")
     .textContent =
@@ -747,156 +930,64 @@ function updatePayment(method) {
     data.method +
     " အချက်အလက်များအတိုင်း ငွေပေးချေပြီး Transfer Screenshot တင်ပါ။";
 
-
-
-  /* Refresh payment box animation */
-
-  const paybox =
-    document.querySelector(".paybox");
-
-
-  paybox.style.animation =
-    "none";
-
-
-  void paybox.offsetWidth;
-
-
-  paybox.style.animation =
-    "contentUp .45s cubic-bezier(.2,.8,.2,1)";
-
-
 }
 
 
-
-/* =========================================
-   MAIN PAYMENT BUTTON
-========================================= */
-
 payBtn.addEventListener("click", () => {
-
-
-  /* Remove focus */
 
   payBtn.blur();
 
-
-  /* Restart click animation */
-
-  payBtn.classList.remove(
-    "clicked"
-  );
-
+  payBtn.classList.remove("clicked");
 
   void payBtn.offsetWidth;
 
+  payBtn.classList.add("clicked");
 
-  payBtn.classList.add(
-    "clicked"
-  );
-
-
-
-  /* Reveal payment section */
 
   setTimeout(() => {
 
-
-    paymentSection.classList.add(
-      "show"
-    );
-
-
-
-    /* Scroll to payment */
+    paymentSection.classList.add("show");
 
     setTimeout(() => {
 
-
       paymentSection.scrollIntoView({
-
         behavior: "smooth",
-
         block: "start"
-
       });
-
 
     }, 150);
 
-
   }, 420);
-
 
 });
 
-
-
-/* =========================================
-   PAYMENT METHOD SELECT
-========================================= */
 
 methodCards.forEach((card) => {
 
+  card.addEventListener("click", () => {
 
-  card.addEventListener(
-    "click",
-    () => {
-
-
-      /* Remove active */
-
-      methodCards.forEach((item) => {
-
-        item.classList.remove(
-          "active"
-        );
-
-      });
+    methodCards.forEach((item) => {
+      item.classList.remove("active");
+    });
 
 
-
-      /* Add active */
-
-      card.classList.add(
-        "active"
-      );
+    card.classList.add("active");
 
 
-
-      /* Get method */
-
-      const method =
-        card.dataset.method;
+    const method =
+      card.dataset.method;
 
 
+    updatePayment(method);
 
-      /* Update */
-
-      updatePayment(
-        method
-      );
-
-
-    }
-  );
-
+  });
 
 });
 
 
-
-/* =========================================
-   DEFAULT PAYMENT
-========================================= */
-
 updatePayment("kbz");
-
 
 </script>
 
-
 </body>
-
 </html>
