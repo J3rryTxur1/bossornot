@@ -1443,3 +1443,142 @@ a {
     font-size: 11px;
   }
 }
+
+/* =================================
+   CERTIFICATE PREVIEW FIX
+================================= */
+
+.certificate-card {
+  aspect-ratio: 1.38 / 1;
+}
+
+.certificate-border {
+  padding: 24px;
+}
+
+.certificate-title {
+  margin-top: 20px;
+}
+
+.certificate-present {
+  margin-top: 12px;
+}
+
+.certificate-name {
+  margin-top: 7px;
+  font-size: 25px;
+}
+
+.certificate-line {
+  margin: 7px auto 10px;
+}
+
+.certificate-border p {
+  max-width: 250px;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.certificate-meta {
+  bottom: 13px;
+  left: 18px;
+  right: 18px;
+}
+
+.verified-seal {
+  right: 18px;
+  bottom: 28px;
+  width: 43px;
+  height: 43px;
+  font-size: 17px;
+}
+
+
+/* =================================
+   MOBILE CERTIFICATE
+================================= */
+
+@media (max-width: 600px) {
+
+  .hero {
+    gap: 15px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+    line-height: 1.4;
+  }
+
+  .certificate-card {
+    width: 91%;
+    aspect-ratio: 1.38 / 1;
+    margin-top: 5px;
+  }
+
+  .certificate-border {
+    padding: 14px;
+  }
+
+  .certificate-crown {
+    font-size: 21px;
+  }
+
+  .certificate-brand {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .certificate-sub {
+    font-size: 6px;
+    letter-spacing: 3px;
+  }
+
+  .certificate-title {
+    margin-top: 10px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .certificate-present {
+    margin-top: 9px;
+    font-size: 7px;
+  }
+
+  .certificate-name {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+
+  .certificate-line {
+    width: 58%;
+    margin: 5px auto 7px;
+  }
+
+  .certificate-border p {
+    max-width: 190px;
+    font-size: 6px;
+    line-height: 1.4;
+  }
+
+  .certificate-meta {
+    bottom: 9px;
+    left: 11px;
+    right: 11px;
+  }
+
+  .certificate-meta small {
+    font-size: 5px;
+  }
+
+  .certificate-meta strong {
+    font-size: 6px;
+  }
+
+  .verified-seal {
+    right: 10px;
+    bottom: 18px;
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+}
